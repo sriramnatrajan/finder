@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="sizeBucket">4</integer>
+    <integer name="enabler">23</integer>
+    <integer name="slyInt">11</integer>
+</resources>

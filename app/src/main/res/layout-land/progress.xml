@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center"
+    android:orientation="vertical"
+    android:id="@+id/ll_category_details_progress_container"
+    android:background="#ab0a0909"
+    android:paddingLeft="25dp"
+    android:paddingTop="5dp"
+    android:paddingRight="25dp"
+    android:paddingBottom="5dp"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.focusmedica.aqrshell.ProgressBar
+        android:id="@+id/progress_bar_download_dialog"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:max="100"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:id="@+id/tv_download_dialog"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0% Downloading ..."
+        style="@style/AppTheme.AppBarOverlay" />
+</LinearLayout>

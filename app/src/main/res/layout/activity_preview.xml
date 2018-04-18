@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@drawable/backlayout"
+    tools:context="com.focusmedica.aqrshell.PreviewActivity">
+<LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_gravity="center|center_horizontal|center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal">
+    <ImageView
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/thumbdownload"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ud_download_pressed" />
+
+    <ImageView
+        android:layout_marginRight="50dp"
+        android:id="@+id/transcriptbtn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/thumbdownload"
+        android:layout_toRightOf="@+id/thumbdownload"
+        android:src="@drawable/transcript_pressed" />
+
+</LinearLayout>
+    <RelativeLayout
+        android:layout_below="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:foregroundGravity="center_vertical|center_horizontal|center"
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+<ImageView
+    android:id="@+id/thumbPlay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+    </RelativeLayout>
+       <!-- <ImageView
+            android:visibility="invisible"
+            android:id="@+id/thumbPlay"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/videobtn"
+            android:layout_alignStart="@+id/videobtn"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="46dp"
+            android:layout_marginStart="46dp"
+            android:src="@drawable/ic_action_play" />-->
+
+</RelativeLayout>

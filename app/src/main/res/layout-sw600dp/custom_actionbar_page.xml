@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="70dp"
+    android:background="#d6d6d6">
+    <ImageView
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:src="@drawable/ic_home"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/home"
+        android:textSize="13dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp" />
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:src="@drawable/fmlogo"
+        android:layout_centerInParent="true"
+        android:id="@+id/logo"
+        android:layout_alignBottom="@+id/sync"
+        android:layout_alignTop="@+id/sync" />
+
+
+
+</RelativeLayout>

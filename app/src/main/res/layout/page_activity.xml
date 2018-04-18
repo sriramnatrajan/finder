@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="horizontal"
+    android:clickable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <!-- <android.support.v7.widget.Toolbar
+        android:background="#404040"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/toolbar"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp"
+            >
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:src="@drawable/button_home"
+                android:id="@+id/ivHome"
+                android:padding="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                >
+            </ImageView>
+
+            <Button
+                android:visibility="gone"
+                android:background="#00ffffff"
+                android:id="@+id/btnBack"
+                android:layout_alignParentLeft="true"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:text="Back"
+                android:textColor="#ffffff"
+                android:drawableLeft="@drawable/back_arrow"
+                >
+            </Button>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/fmlogo"
+                android:layout_centerInParent="true"
+                />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:src="@drawable/button_info"
+                android:id="@+id/ivInfo"
+                android:padding="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+-->
+    <LinearLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <WebView android:id="@+id/webView"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"/>
+
+        <!--<LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/ll_button_container"
+            android:layout_width="20dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            >
+
+            <Button
+                android:textSize="12sp"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:id="@+id/bt_quick_ref"
+                android:background="#ffff1d11"
+                android:layout_width="wrap_content"
+                android:layout_height="0.0dip"
+                android:text="@string/quick_reference"
+                android:includeFontPadding="false"
+                android:layout_weight="0.5"
+                />
+
+            <Button
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:id="@+id/bt_glossary"
+                android:background="#ff4569ff"
+                android:layout_width="wrap_content"
+                android:layout_height="0.0dip"
+                android:text="@string/glossary"
+                android:includeFontPadding="false"
+                android:layout_weight="0.5" />
+        </LinearLayout>-->
+    </LinearLayout>
+</RelativeLayout>

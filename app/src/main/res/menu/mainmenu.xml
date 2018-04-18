@@ -1,0 +1,43 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:visible="false"
+        android:id="@+id/action_settings"
+        android:icon="@drawable/menu"
+        android:orderInCategory="100"
+        android:showAsAction="always">
+        <menu>
+            <item
+                android:icon="@drawable/transcript"
+                android:id="@+id/transcript"
+                android:orderInCategory="97"
+                android:showAsAction="always"
+                android:title="Transcript"/>
+            <item
+                android:id="@+id/notes"
+                android:icon="@drawable/notes"
+                android:orderInCategory="98"
+                android:showAsAction="always"
+                android:title="Notes"/>
+            <item
+                android:id="@+id/info"
+                android:icon="@drawable/infoimage"
+                android:orderInCategory="99"
+                android:showAsAction="always"
+                android:title="Info"/>
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_action_logout"
+                android:orderInCategory="99"
+                android:showAsAction="always"
+                android:title="logout"/>
+        </menu>
+    </item>
+
+    <!--<item
+        android:id="@+id/buyAll"
+        android:icon="@drawable/buy"
+        android:orderInCategory="99"
+        android:showAsAction="always"/>
+-->
+</menu>

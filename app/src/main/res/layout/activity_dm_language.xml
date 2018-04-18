@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+ <!--   <android.support.v7.widget.Toolbar
+        android:background="#404040"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/toolbar"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp"
+            >
+
+            <Button
+                android:gravity="center"
+                android:background="#00ffffff"
+                android:id="@+id/btnBack"
+                android:layout_alignParentLeft="true"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:text="Back"
+                android:textColor="#ffffff"
+                android:drawableLeft="@drawable/back_arrow"
+                >
+            </Button>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/fmlogo"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>-->
+
+    <ListView
+        android:id="@+id/lvLanguageList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+</LinearLayout>

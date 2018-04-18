@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">AQR</string>
+    <string name="footer">© Focus Medica\nwww.focusmedica.com</string>
+    <string name="text_feedback_mail_id">apps@focusmedica.in</string>
+    <string name="text_prod_id">com.focusmedica.ud.engacne</string>
+    <string name="text_prod_id1">com.focusmedica.ud.engacne</string>
+    <string name="banner_ad_unit_id">ca-app-pub-8104924574021142/6524942317</string>
+    <string name="title_activity_my">MyActivity</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Fullname</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="btn_link_to_register">Not a member? Sign up now.</string>
+    <string name="btn_link_to_login">Already registred! Login Me.</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_logout">LOGOUT</string>
+    <string name="name">Fullname</string>
+
+    <string name="action_settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Content</string>
+    <string name="Sorting">Sorting</string>
+    <string name="title_activity_firstpage">Firstpage</string>
+    <string name="Heading">Animated Pocket Dictionary of Cholesterol</string>
+    <string name="content1"></string>
+    <string name="text_feedback">Feedback</string><!--
+    <string name="text_feedback_mail_id">apps@focusmedica.in</string>
+    <string name="banner_ad_unit_id">ca-app-pub-8104924574021142/7151056710</string>-->
+</resources>

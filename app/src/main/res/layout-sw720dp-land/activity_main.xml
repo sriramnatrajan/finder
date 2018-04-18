@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/grid_id"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:drawableLeft="@drawable/ic_search"
+            android:layout_marginTop="7dp"
+            android:padding="5dp"
+            android:background="@drawable/round_shape"
+            android:hint="Search "
+            android:layout_marginLeft="250dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/search_result"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_width="399dp"
+            android:layout_height="50dp"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:id="@+id/rvFiltered"
+            android:layout_below="@+id/search_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_below="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:id="@+id/grid"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <GridView
+            android:id="@+id/grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="@dimen/cardview_default_radius"
+            android:numColumns="5"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.BottomNavigationView
+            android:background="@color/md_teal_400"
+            android:id="@+id/bottom_navigation"
+            android:gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            design:menu="@menu/bar_menu"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+        </android.support.design.widget.BottomNavigationView>
+    </RelativeLayout>
+
+</RelativeLayout>

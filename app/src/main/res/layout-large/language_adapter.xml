@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:padding="10dp"
+    android:background="@drawable/rectangle"
+    android:weightSum="1">
+
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/ivAppIcon"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="new text"
+        android:layout_marginLeft="25dp"
+        android:id="@+id/tvLanguageName"
+        android:textSize="24sp"
+        android:textColor="#000000"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/ivAppIcon"
+        android:layout_toEndOf="@+id/ivAppIcon"
+        android:layout_marginStart="25dp" />
+
+    <ImageView
+        android:focusable = "false"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/ivDownload"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/icn_download"/>
+
+    <!--<ImageView
+        android:clickable="true"
+        android:src="@drawable/trensparent"
+        android:layout_width="match_parent"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/ivDownload"
+        android:layout_height="90dp"
+        android:id="@+id/imageView10"/>-->
+
+
+</RelativeLayout>

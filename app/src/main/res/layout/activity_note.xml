@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/notes"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etNotes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Take your notes here.."
+        android:gravity="top"
+        android:background="#d9d5d0"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btnCancel"
+            android:text="Cancel"
+            android:background="#dad8d5"/>
+
+        <Button
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btnSave"
+            android:text="Save"
+            android:background="#cf1c1c"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
