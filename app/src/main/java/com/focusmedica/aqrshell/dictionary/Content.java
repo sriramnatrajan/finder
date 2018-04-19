@@ -48,12 +48,12 @@ public class Content extends Fragment {
     Showpopup popup;
     Mydatabase mdatabase;
     List listcontent;
-    DownloadFileFromURL asyncobj,asyncobj2,asyncobj3,asyncobj4,asyncobj5,asyncobj6;
+    DownloadFileFromURL asyncobj ;
     String vdoname,firstchar;
     ProgressDialog pDialog;
     int img_position,flag=0;
     Boolean ispremium=true;
-    View mView;
+    View mView;  String videofileName;
     ArrayList<DIctionaryContent> AppDetails=new ArrayList<>();
     String linkStr;
     String name,description; ListAdapter.ViewHolder mViewHolder; String a0,a1;
@@ -97,6 +97,7 @@ public class Content extends Fragment {
 
             }
         });
+        mdatabase.close();
         return rootView;
     }
 
@@ -241,7 +242,7 @@ TextView title,content;
                             return;
                         }
                         asyncobj = new DownloadFileFromURL();
-                        String url =vdoname.replaceAll(" ", "%20");
+                          videofileName =vdoname.replaceAll(" ", "%20");
                         img_position=viewHolder.img.getId();
                         pDialog = new ProgressDialog(getActivity());
                         pDialog.setMessage("Downloading.... Please wait...");
@@ -258,13 +259,13 @@ TextView title,content;
                         });
                         pDialog.setCancelable(false);
                         pDialog.setCanceledOnTouchOutside(false);
-                        System.out.println("checkurl:"+url);
+                        System.out.println("checkurl:"+videofileName);
 
                         AppDetails=mdatabase.getAppDetail();
                         content=AppDetails.get(0);
                        linkStr=content.getDlink();
 
-                       asyncobj.execute(linkStr+url);
+                       asyncobj.execute(linkStr+videofileName);
 
                     }else if(viewHolder.img.getDrawable().getConstantState().equals
                             (ContextCompat.getDrawable(context, R.drawable.play_pressed).getConstantState())){
@@ -277,6 +278,7 @@ TextView title,content;
                        }
                 }
             });
+            mdatabase.close();
             return view;
         }
     }

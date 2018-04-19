@@ -96,9 +96,7 @@ public class CollectionsActivity extends Activity {
                     dataModel=chapterList.get(position);
                     String f2=dataModel.getApp_id();
                     Intent i=new Intent(getApplicationContext(),PreviewActivity.class);
-                    // i.putExtra("url",dataModel.getDlink());
-                    //i.putExtra("titlePages",dataModel.getTitlePages());
-                    i.putExtra("titleName",dataModel.getName());
+                     i.putExtra("titleName",dataModel.getName());
                     startActivity(i);
                 }else{
            Intent i=new Intent(getApplicationContext(), Firstpage.class);
@@ -108,7 +106,6 @@ public class CollectionsActivity extends Activity {
            Log.d("APPPP_ID+++++++++++++++",dataModel.getApp_id());
            startActivity(i);
                 }
-
             }
         });
     }

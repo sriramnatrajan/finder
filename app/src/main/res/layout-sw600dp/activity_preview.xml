@@ -11,10 +11,6 @@
 
 
 
-    <RelativeLayout
-        android:layout_below="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/te"
             android:gravity="center"
@@ -23,16 +19,16 @@
             <ImageView
                 android:layout_marginLeft="50dp"
                 android:id="@+id/thumbdownload"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ud_download_pressed" />
 
             <ImageView
                 android:layout_marginLeft="50dp"
                 android:id="@+id/transcriptbtn"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="10dp"
@@ -40,6 +36,7 @@
                 android:layout_toRightOf="@+id/thumbdownload"
                 android:src="@drawable/transcript_pressed" />
         </RelativeLayout>
-    </RelativeLayout>
+
+
 
 </RelativeLayout>

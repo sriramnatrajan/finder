@@ -40,7 +40,7 @@ public class LogActivity extends Activity {
     private SQLiteHandler db;
     String email,password,titleId;
     ProgressDialog pDialog1;
-      String  name,value,appid,appInfo;
+    String  name,value,appid,appInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -259,7 +259,16 @@ public class LogActivity extends Activity {
         });
     }
 
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
 
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+}
     /**
      * function to verify login details in mysql db
      * */
@@ -350,14 +359,5 @@ public class LogActivity extends Activity {
         ApplicationController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 */
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
 
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
-}
 

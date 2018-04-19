@@ -7,6 +7,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -17,10 +20,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.focusmedica.aqrshell.dbHandler.SQLiteHandler;
-import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -43,18 +49,17 @@ String url, titleName;
     String tn0; File fileDir;
     double screenInches;
     android.widget.ProgressBar spinner;   DataModel dataModel;
-    String a0,a1,a2,a3;
+    String a0,a1,a2,a3;RelativeLayout mRelativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview);
 
-        spinner = ( android.widget.ProgressBar) findViewById(R.id.progressBar1);
-        spinner.setVisibility(View.VISIBLE);
-
+       // spinner = ( android.widget.ProgressBar) findViewById(R.id.progressBar1);
+        //spinner.setVisibility(View.VISIBLE);
+        mRelativeLayout=(RelativeLayout)findViewById(R.id.bg);
         thumbDownload=(ImageView)findViewById(R.id.thumbdownload);
         transcript=(ImageView)findViewById(R.id.transcriptbtn);
-        thumbnailImage=(ImageView)findViewById(R.id.thumbPlay) ;
         final ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
@@ -90,24 +95,41 @@ String url, titleName;
 
      tn0=titleName.toLowerCase();
         if (screenInches<=5.571247911145661){
-            Picasso.with(PreviewActivity.this).load(a1+"/phone_bg.png").into(thumbnailImage);
-            spinner.setVisibility(View.GONE);
+            Glide.with(this).load(a1+"/phone_brand.png").asBitmap().into(new SimpleTarget<Bitmap>(100, 100) {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    Drawable drawable = new BitmapDrawable(getApplicationContext().getResources(), resource);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        mRelativeLayout.setBackground(drawable);
+                    }
+                }
+            });
+            Log.d("TAGURL",a1+"/phone_brand.png");
+            //spinner.setVisibility(View.GONE);
 
         }else {
-            Picasso.with(PreviewActivity.this).load(a1+"/tab_bg.png").into(thumbnailImage);
-            spinner.setVisibility(View.GONE);
-
+            Glide.with(this).load(a1+"/tab_brand.png").asBitmap().into(new SimpleTarget<Bitmap>(200, 200) {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                Drawable drawable = new BitmapDrawable(getApplicationContext().getResources(), resource);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        mRelativeLayout.setBackground(drawable);
+                    }
+                }
+            });
+            Log.d("TAGURL",a1+"/phone_brand.png");
+           // spinner.setVisibility(View.GONE);
         }
 
         mFile=new File(getApplicationContext().getFilesDir()+"/"+tn0+"/");
        if (!mFile.exists())
             mFile.mkdirs();
-     fileDir=new File(mFile+"video.mp4");
-        Log.d("TAG",fileDir.toString());
-        if (fileDir.exists()){
+         fileDir=new File(mFile+"video.mp4");
+         Log.d("TAG",fileDir.toString());
+         if (fileDir.exists()){
          thumbDownload.setImageResource(R.drawable.ud_play_video_pressed);
-        }else{
-            thumbDownload.setImageResource(R.drawable.ud_download_pressed);
+         }else{
+         thumbDownload.setImageResource(R.drawable.ud_download_pressed);
         }
 
         thumbDownload.setOnClickListener(new View.OnClickListener() {

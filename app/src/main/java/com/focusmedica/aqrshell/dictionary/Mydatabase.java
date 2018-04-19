@@ -6,6 +6,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.focusmedica.aqrshell.DataModel;
 import com.focusmedica.aqrshell.app.AppConfig;
 import com.focusmedica.aqrshell.utils.Activities.ApplicationController;
 
@@ -85,7 +87,30 @@ public class Mydatabase  extends SQLiteOpenHelper {
         db.close();
         return description;
     }
+    public ArrayList<DIctionaryContent> getVideoFileName(String ch) {
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<DIctionaryContent> imageList = null;
+        try {
+            imageList = new ArrayList<DIctionaryContent>();
+            String QUERY=" SELECT WVideoName FROM WordsTable WHERE WVideoName Like"+"'"+ch+"%"+"'";
+
+            Cursor mCursor = db.rawQuery(QUERY, null);
+
+            if (!mCursor.isLast()) {
+                while (mCursor.moveToNext()) {
+                    DIctionaryContent chapter = new DIctionaryContent();
+                  chapter.setVDOname(mCursor.getString(0));
+                    //  chapter.setVDOname(mCursor.getString(mCursor.getColumnIndex("WVideoName")));
+                    imageList.add(chapter);
+                }
+            }
+            db.close();
+        } catch (Exception e) {
+            Log.e("TITLE NAME", e + "" + e.getMessage());
+        }
+        return imageList;
+    }
     private DIctionaryContent parseContent(Cursor cursor) {
         DIctionaryContent content = new DIctionaryContent();
         content.setID((cursor.getInt(cursor.getColumnIndex("WID"))));

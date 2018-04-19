@@ -28,7 +28,7 @@ public class Showpopup {
         mdatabase=new Mydatabase(ctx,"");
         mdatabase.openDataBase();
         description=mdatabase.get_content(name);
-
+        mdatabase.close();
     }
 
     public void launch(View parent){
