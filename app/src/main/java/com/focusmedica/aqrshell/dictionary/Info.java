@@ -55,6 +55,8 @@ public class Info extends Activity {
 
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         info= (ImageView) mCustomView.findViewById(R.id.imageView4);
+        ImageView  iv_download=(ImageView)mCustomView. findViewById(R.id.iv_download);
+        iv_download.setVisibility(View.INVISIBLE);
         Glide.with(Info.this).load(thumb+"_thumbnail.png").into(thumbnailimageview);
         Log.d("Thumbnail",thumb+"_thumbnail.png");
         // buy= (ImageView) mCustomView.findViewById(R.id.imageView3);

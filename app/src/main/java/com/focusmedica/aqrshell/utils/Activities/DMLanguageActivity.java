@@ -310,10 +310,8 @@ public class DMLanguageActivity extends Activity implements CancelListener{
 
                     handler.addLanguage(city);// Inserting into DB
 
-
                     //list.add(city);
                 }
-
 
             } catch (JSONException e) {
                 e.printStackTrace();

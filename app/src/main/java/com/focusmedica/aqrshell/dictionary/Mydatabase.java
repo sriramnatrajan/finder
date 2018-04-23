@@ -86,11 +86,13 @@ public class Mydatabase  extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return description;
-    }
-    public ArrayList<DIctionaryContent> getVideoFileName(String ch) {
 
+    }
+
+    public ArrayList<DIctionaryContent> getVideoFileName(String ch) {
+        String[] array;
         SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<DIctionaryContent> imageList = null;
+        ArrayList<DIctionaryContent> imageList = new ArrayList<DIctionaryContent>();
         try {
             imageList = new ArrayList<DIctionaryContent>();
             String QUERY=" SELECT WVideoName FROM WordsTable WHERE WVideoName Like"+"'"+ch+"%"+"'";
@@ -98,14 +100,25 @@ public class Mydatabase  extends SQLiteOpenHelper {
             Cursor mCursor = db.rawQuery(QUERY, null);
 
             if (!mCursor.isLast()) {
+                 array=new String[mCursor.getCount()];
+                 DIctionaryContent m=new DIctionaryContent();
+
+                int i=0;
                 while (mCursor.moveToNext()) {
+
                     DIctionaryContent chapter = new DIctionaryContent();
-                  chapter.setVDOname(mCursor.getString(0));
-                    //  chapter.setVDOname(mCursor.getString(mCursor.getColumnIndex("WVideoName")));
+                    chapter.setVDOname(mCursor.getString(0));
+                    String si=mCursor.getString(mCursor.getColumnIndex("WVideoName"));
+                    array[i]=si;
+
+                    chapter.setNameOfVid(array);
+                    i++;
+                    //chapter.setVDOname(mCursor.getString(mCursor.getColumnIndex("WVideoName")));
                     imageList.add(chapter);
                 }
             }
             db.close();
+            mCursor.close();
         } catch (Exception e) {
             Log.e("TITLE NAME", e + "" + e.getMessage());
         }
@@ -165,5 +178,6 @@ public class Mydatabase  extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
+
 }
 

@@ -43,12 +43,16 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
     ArrayList<DIctionaryContent> videoDetails=new ArrayList<>();
     TextView mTextView;
     ImageView iv_download; String  url;
-    String  vdoname;
+    String  vdoname,filterVideoName;
+    Content.ListAdapter mListAdapter;
+    Content c;
+String[] dbvalues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         mTextView=(TextView)findViewById(R.id.title);
+
         if(getResources().getBoolean(R.bool.portrait_only)){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
@@ -76,19 +80,28 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
         url=content.getDlink();
         Log.d("URL File",content.getDlink());
         info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(getApplicationContext(), Info.class);
-                in.putExtra("thumbinfo",thumb);
-                startActivity(in);
+         @Override
+        public void onClick(View view) {
+          Intent in = new Intent(getApplicationContext(), Info.class);
+          in.putExtra("thumbinfo",thumb);
+          startActivity(in);
             }
         });
+
         iv_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-        //TextView tv=(TextView)findViewById(R.id.textView3);
-             //   getVideoFileName
+              //TextView tv=(TextView)findViewById(R.id.textView3);
+              //getVideoFileName
 
+                videoDetails=handler.getVideoFileName("A");
+                content=videoDetails.get(0);
+                vdoname =content.getVDOname();
+
+                filterVideoName=vdoname.replaceAll(" ","");
+                String  s=handler.getVideoFileName("A").toString();
+                new DownloadFileFromURL().execute(url+filterVideoName );
+                Log.d("File",url+filterVideoName );
             }
         });
     }
@@ -103,12 +116,32 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
             public void onClick(View view) {
                 videoDetails=handler.getVideoFileName(firstcharacter);
                 content=videoDetails.get(0);
+                Object[] i=videoDetails.toArray();
                 vdoname =content.getVDOname();
-                Log.d("VideoName",vdoname);
-                Toast.makeText(Main.this, vdoname , Toast.LENGTH_SHORT).show();
-              //  String lower_case=content.getVDOname().toLowerCase().substring(0, content.getVDOname().indexOf(".")).replaceAll(" ", "").replaceAll("-","");
-            new DownloadFileFromURL().execute(url+vdoname );
-            Log.d("File",url+vdoname );
+                handler.getVideoFileName(firstcharacter).get(0);
+
+                filterVideoName=vdoname.replaceAll(" ","%20");
+                Log.d("Object",  videoDetails.toString());
+                Log.d("VideoName", "++++++"+i);
+
+            Log.d("VideoName",vdoname+"++++++"+ handler.getVideoFileName(firstcharacter));
+                /*for(int i=0; i<videoDetails.size();i++){
+                 // Log.d("VideoName",vdoname+"++++++"+i);
+                 //Log.d("Object","++++++"+  content.getNameOfVid().toString());
+               }*/
+                for (int f=0; f<videoDetails.size();f++){
+                 //   Toast.makeText(Main.this, "filter video name"+handler.getVideoFileName(firstcharacter).get(f), Toast.LENGTH_SHORT).show();
+                    Log.d("VideoName","filter video name"+handler.getVideoFileName(firstcharacter).get(f));
+              // content=videoDetails.subList(0,f)
+               String s=content.getVDOname();
+                    Log.d("VideoName","filter video name"+s);
+
+                }
+                //Toast.makeText(Main.this, filterVideoName, Toast.LENGTH_SHORT).show();
+            //  String lower_case=content.getVDOname().toLowerCase().substring(0, content.getVDOname().indexOf(".")).replaceAll(" ", "").replaceAll("-","");
+
+            new DownloadFileFromURL().execute(url+filterVideoName );
+            Log.d("File",url+filterVideoName );
             }
         });
     }
@@ -116,6 +149,7 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
       Log.d(TAG, "onActivityResult(" + requestCode + "," + resultCode + "," + data);
+
       }
 
     void complain(String message) {
@@ -146,9 +180,9 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
             pDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                   //asyncobj.cancel(true);
-               //    Content.ListAdapter.ViewHolder m ;
-                //  m.img.setImageResource(R.drawable.download_enable);
+                    //asyncobj.cancel(true);
+                    // Content.ListAdapter.ViewHolder m ;
+                    // m.img.setImageResource(R.drawable.download_enable);
                     flag = 1;
                 }
             });
@@ -158,11 +192,12 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
         }
 
         private void onDownloadCancelled() {
+
             pDialog.dismiss();
             File dir=getApplicationContext().getFilesDir();
-            File file=new File(dir,vdoname );
+            File file=new File(dir,filterVideoName);
             file.delete();
-        //    adapter.notifyDataSetChanged();
+            //mListAdapter.notifyDataSetChanged();
         }
 
         @Override
@@ -176,25 +211,26 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
             }
         }
 
+
         @Override
         protected String doInBackground(String... f_url) {
             int count;
-
             try {
                 URL url = new URL(f_url[0]);
                 URLConnection conection = url.openConnection();
                 conection.setRequestProperty("Accept-Encoding", "Identity");
                 conection.connect();
                 lengthOfFile = conection.getContentLength();
+
                 InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(getApplicationContext().getFilesDir()+"/"+vdoname);
+                OutputStream output = new FileOutputStream(getApplicationContext().getFilesDir()+"/"+filterVideoName);
                 byte data[] = new byte[1024];
                 while ((count = input.read(data)) != -1 && !isCancelled()) {
-                    if (isCancelled()) break;
-                    total += count;
+                if (isCancelled()) break;
+                total += count;
                     publishProgress("" + (int) ((total * 100) / lengthOfFile));
-                    System.out.println("checking:" + (total * 100) / lengthOfFile);
                     output.write(data, 0, count);
+
                 }
                 output.flush();
                 output.close();
@@ -216,7 +252,7 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
         protected void onPostExecute(String file_url) {
             if (!isCancelled()) {
                 pDialog.dismiss();
-              //  adapter.notifyDataSetChanged();
+               //mListAdapter.notifyDataSetChanged();
             } else {
                 onDownloadCancelled();
             }

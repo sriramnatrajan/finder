@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.MediaController;
 import android.widget.VideoView;
-
 import com.focusmedica.aqrshell.R;
 
 import java.io.File;
@@ -36,7 +35,6 @@ public class VideoPlay2Activity extends Activity {
         AppDetails = mDMydatabase.getAppDetail();
         content = AppDetails.get(0);
         chapterid = content.getID();
-
 
         String lower_case = vdoname.toLowerCase().substring(0, vdoname.indexOf(".")).replaceAll(" ", "").replaceAll("-", "");
         try {
@@ -69,4 +67,5 @@ public class VideoPlay2Activity extends Activity {
 
     }
 }
+
 

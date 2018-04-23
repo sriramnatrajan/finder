@@ -52,7 +52,7 @@ public class Content extends Fragment {
     String vdoname,firstchar;
     ProgressDialog pDialog;
     int img_position,flag=0;
-    Boolean ispremium=true;
+ //   Boolean ispremium=true;
     View mView;  String videofileName;
     ArrayList<DIctionaryContent> AppDetails=new ArrayList<>();
     String linkStr;
@@ -68,7 +68,7 @@ public class Content extends Fragment {
         adapter=new ListAdapter(getActivity(),"A");
 
         SharedPreferences appInfo = getActivity().getSharedPreferences("appInfo", getActivity().MODE_PRIVATE);
-        ispremium= appInfo.getBoolean("isPremium",false);
+        //ispremium= appInfo.getBoolean("isPremium",false);
         Lview.setAdapter(adapter);
         Lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -172,11 +172,10 @@ TextView title,content;
             viewHolder.content.setText(content.getDescription());
             viewHolder.img.setTag(content.getVDOname());
             viewHolder.img.setId(position);
-            a0=content.getTitle();a1=content.getDescription();
-            System.out.println("premium" + ispremium);
+//           System.out.println("premium" + ispremium);
             String lower_case=content.getVDOname().toLowerCase().substring(0, content.getVDOname().indexOf(".")).replaceAll(" ", "").replaceAll("-","");
 
-            if(ispremium==true) {
+        /*    if(ispremium==true) {
                 if (content.getAlphaflsg().equals("A")) {
                     if(position<10) {
                         if (new File("data/data/com.focusmedica.aqrshell/files/" + content.getVDOname()).exists()) {
@@ -208,7 +207,7 @@ TextView title,content;
                     viewHolder.title.setTextColor(Color.parseColor("#808080"));
                     viewHolder.content.setTextColor(Color.parseColor("#808080"));
                 }
-            }else{
+            }else{*/
                 if (new File("data/data/com.focusmedica.aqrshell/files/" + content.getVDOname()).exists()) {
                     viewHolder.img.setImageResource(R.drawable.play_pressed);
                     viewHolder.title.setTextColor(Color.parseColor("#ffffff"));
@@ -228,7 +227,7 @@ TextView title,content;
                     viewHolder.content.setTextColor(Color.parseColor("#ffffff"));
                 }
 
-            }
+
 
             viewHolder.img.setOnClickListener(new View.OnClickListener() {
 
@@ -264,7 +263,6 @@ TextView title,content;
                         AppDetails=mdatabase.getAppDetail();
                         content=AppDetails.get(0);
                        linkStr=content.getDlink();
-
                        asyncobj.execute(linkStr+videofileName);
 
                     }else if(viewHolder.img.getDrawable().getConstantState().equals
@@ -352,7 +350,7 @@ TextView title,content;
                     if (isCancelled()) break;
                     total += count;
                     publishProgress("" + (int) ((total * 100) / lengthOfFile));
-                    System.out.println("checking:" + (total * 100) / lengthOfFile);
+                   // System.out.println("checking:" + (total * 100) / lengthOfFile);
                     output.write(data, 0, count);
                 }
                 output.flush();

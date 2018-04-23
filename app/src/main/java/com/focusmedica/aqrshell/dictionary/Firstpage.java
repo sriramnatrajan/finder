@@ -83,7 +83,6 @@ public class Firstpage extends Activity {
                 ((ApplicationController)getApplicationContext()).setDataBaseName("/data/data/com.focusmedica.aqrshell/databases/"+a3+"_db.dll");
 
                 if (file.exists()) {
-
                     Intent intent = new Intent(getApplicationContext(), Main.class);
                     intent.putExtra("thumbinfo",urlValue+"/"+a3);
                     startActivity(intent);

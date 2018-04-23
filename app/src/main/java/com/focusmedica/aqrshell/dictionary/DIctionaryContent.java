@@ -11,6 +11,16 @@ public class DIctionaryContent {
     String VDOname;
     String BUYflag;
     String Alphaflsg;
+    String[] nameOfVid;
+    public String[] getNameOfVid() {
+        return nameOfVid;
+    }
+
+    public void setNameOfVid(String[] nameOfVid) {
+        this.nameOfVid = nameOfVid;
+    }
+
+
 
     public int getID() {
         return ID;
