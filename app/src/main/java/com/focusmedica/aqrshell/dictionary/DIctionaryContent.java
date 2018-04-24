@@ -16,6 +16,15 @@ public class DIctionaryContent {
         return nameOfVid;
     }
 
+    public String getAlphabet() {
+        return alphabet;
+    }
+
+    public void setAlphabet(String alphabet) {
+        this.alphabet = alphabet;
+    }
+
+    String alphabet;
     public void setNameOfVid(String[] nameOfVid) {
         this.nameOfVid = nameOfVid;
     }

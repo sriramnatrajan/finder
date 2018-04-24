@@ -140,7 +140,7 @@ public class Content extends Fragment {
 
             ImageView img;
 
-TextView title,content;
+        TextView title,content;
         }
         @Override
         public View getView(int position, View view, ViewGroup viewGroup) {

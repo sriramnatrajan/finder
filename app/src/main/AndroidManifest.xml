@@ -39,7 +39,7 @@
         <activity
             android:name=".MediaPlayerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity android:name=".Info" />
         <activity android:name=".Notes" />
         <activity android:name=".Transcript" />
         <activity android:name=".ContentActivity" />
@@ -58,9 +58,9 @@
 
         </activity>
         <activity android:name=".dictionary.Main"/>
-        <activity android:name=".dictionary.VideoPlay2Activity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".dictionary.VideoPlay2Activity"/>
         <activity android:name=".dictionary.Info"/>
+
     </application>
 
 </manifest>

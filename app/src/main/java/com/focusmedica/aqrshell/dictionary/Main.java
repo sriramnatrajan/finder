@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -45,7 +46,7 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
     ImageView iv_download; String  url;
     String  vdoname,filterVideoName;
     Content.ListAdapter mListAdapter;
-    Content c;
+    Content c;Context mContext;
 String[] dbvalues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +88,9 @@ String[] dbvalues;
           startActivity(in);
             }
         });
+     onArticleSelected("A");
 
-        iv_download.setOnClickListener(new View.OnClickListener() {
+        /*       iv_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
               //TextView tv=(TextView)findViewById(R.id.textView3);
@@ -100,35 +102,65 @@ String[] dbvalues;
 
                 filterVideoName=vdoname.replaceAll(" ","");
                 String  s=handler.getVideoFileName("A").toString();
-                new DownloadFileFromURL().execute(url+filterVideoName );
+                new DownloadFileFromURL(url+filterVideoName,  filterVideoName).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 Log.d("File",url+filterVideoName );
+
             }
-        });
+        });*/
     }
 
     @Override
     public void onArticleSelected(final String firstcharacter) {
         Content contfrag = (Content) getFragmentManager().findFragmentById(R.id.content);
         contfrag.test(firstcharacter);
-      //  Toast.makeText(Main.this,firstcharacter, Toast.LENGTH_SHORT).show();
+
+     try {
+         videoDetails = handler.getVideoFileName(firstcharacter);
+         DIctionaryContent item = videoDetails.get(0);
+         String name = item.getVDOname();
+         if (!videoDetails.isEmpty()) {
+             if (new File("data/data/com.focusmedica.aqrshell/files/" +name).exists()) {
+                 iv_download.setVisibility(View.INVISIBLE);
+             } else {
+                 iv_download.setVisibility(View.VISIBLE);
+             }
+         }
+     }catch (IndexOutOfBoundsException e){
+         e.printStackTrace();
+        // Log.d("Call","https://www.google.co.in/search?q="+e);
+         handler.close();
+     }
+
         iv_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                videoDetails=handler.getVideoFileName(firstcharacter);
-                content=videoDetails.get(0);
+                videoDetails = handler.getVideoFileName(firstcharacter);
+                if (!videoDetails.isEmpty()) {
+                    for (int i = 0; i < videoDetails.size(); i++) {
+                        DIctionaryContent item = videoDetails.get(i);
+                        String name = item.getVDOname();
+                        name = name.replaceAll(" ", "%20");
+                        Log.d("File: ", url + name);
+
+                        new DownloadFileFromURL(url + name, name).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                    }
+                }
+
+                /*content=videoDetails.get(0);
                 Object[] i=videoDetails.toArray();
                 vdoname =content.getVDOname();
-                handler.getVideoFileName(firstcharacter).get(0);
+              //  handler.getVideoFileName(firstcharacter).get(0);
 
                 filterVideoName=vdoname.replaceAll(" ","%20");
                 Log.d("Object",  videoDetails.toString());
                 Log.d("VideoName", "++++++"+i);
 
             Log.d("VideoName",vdoname+"++++++"+ handler.getVideoFileName(firstcharacter));
-                /*for(int i=0; i<videoDetails.size();i++){
+                *//*for(int i=0; i<videoDetails.size();i++){
                  // Log.d("VideoName",vdoname+"++++++"+i);
                  //Log.d("Object","++++++"+  content.getNameOfVid().toString());
-               }*/
+               }*//*
                 for (int f=0; f<videoDetails.size();f++){
                  //   Toast.makeText(Main.this, "filter video name"+handler.getVideoFileName(firstcharacter).get(f), Toast.LENGTH_SHORT).show();
                     Log.d("VideoName","filter video name"+handler.getVideoFileName(firstcharacter).get(f));
@@ -138,10 +170,7 @@ String[] dbvalues;
 
                 }
                 //Toast.makeText(Main.this, filterVideoName, Toast.LENGTH_SHORT).show();
-            //  String lower_case=content.getVDOname().toLowerCase().substring(0, content.getVDOname().indexOf(".")).replaceAll(" ", "").replaceAll("-","");
-
-            new DownloadFileFromURL().execute(url+filterVideoName );
-            Log.d("File",url+filterVideoName );
+            //  String lower_case=content.getVDOname().toLowerCase().substring(0, content.getVDOname().indexOf(".")).replaceAll(" ", "").replaceAll("-","");*/
             }
         });
     }
@@ -168,6 +197,13 @@ String[] dbvalues;
     public  class DownloadFileFromURL extends AsyncTask<String, String, String> {
         private long total = 0L;
         private long lengthOfFile = 0L;
+
+        private String mUrl;
+        private String mName;
+        public DownloadFileFromURL(String url, String name) {
+            mUrl = url;
+            mName = name;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -216,14 +252,15 @@ String[] dbvalues;
         protected String doInBackground(String... f_url) {
             int count;
             try {
-                URL url = new URL(f_url[0]);
+                URL url = new URL(mUrl);
                 URLConnection conection = url.openConnection();
                 conection.setRequestProperty("Accept-Encoding", "Identity");
                 conection.connect();
                 lengthOfFile = conection.getContentLength();
 
                 InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(getApplicationContext().getFilesDir()+"/"+filterVideoName);
+                OutputStream output = new FileOutputStream(getApplicationContext().getFilesDir()+"/"
+                        + mName);
                 byte data[] = new byte[1024];
                 while ((count = input.read(data)) != -1 && !isCancelled()) {
                 if (isCancelled()) break;
@@ -250,14 +287,13 @@ String[] dbvalues;
 
         @Override
         protected void onPostExecute(String file_url) {
-            if (!isCancelled()) {
-                pDialog.dismiss();
-               //mListAdapter.notifyDataSetChanged();
+            handler.close();
+                if (pDialog.isShowing())pDialog.dismiss();
+             if (!isCancelled()) {
+                 if (pDialog.isShowing())pDialog.dismiss();
             } else {
                 onDownloadCancelled();
             }
         }
     }
 }
-
-

@@ -59,7 +59,29 @@ public class Mydatabase  extends SQLiteOpenHelper {
         }
         return chapterList;
     }
+    public ArrayList<DIctionaryContent> getAlphabets() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<DIctionaryContent> chapterList = null;
+        try{
+            chapterList = new ArrayList<DIctionaryContent>();
+            String QUERY = "SELECT DISTINCT  WAlphabet FROM WordsTable";
+            Cursor cursor = db.rawQuery(QUERY, null);
+            if(!cursor.isLast())
+            {
+                while (cursor.moveToNext())
+                {
+                    DIctionaryContent chapter = new DIctionaryContent();
+                    chapter.setAlphabet(cursor.getString(0));
 
+                    chapterList.add(chapter);
+                }
+            }
+            db.close();
+        }catch (Exception e){
+            Log.e("error", e + "");
+        }
+        return chapterList;
+    }
     public List Get_ContactDetails(String firstchar) {
         List listcontent=new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -124,6 +146,7 @@ public class Mydatabase  extends SQLiteOpenHelper {
         }
         return imageList;
     }
+
     private DIctionaryContent parseContent(Cursor cursor) {
         DIctionaryContent content = new DIctionaryContent();
         content.setID((cursor.getInt(cursor.getColumnIndex("WID"))));
