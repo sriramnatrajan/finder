@@ -30,9 +30,7 @@ public class Firstpage extends Activity {
      String  a3,urlValue,url;
     private static File videoFile;
     ImageView ivLoading,brandPage;
-  //  IndexValue mStringValue=new IndexValue();
-  //  String murl=mStringValue.getmUrl();
-    String dbname;   double screenInches;
+  double screenInches;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

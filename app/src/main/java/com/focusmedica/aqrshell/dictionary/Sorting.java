@@ -44,7 +44,9 @@ Mydatabase mydatabase;
                 adapter.listselected(i);
             }
         });
+        mydatabase.close();
         return rootView;
+
     }
 
     @Override

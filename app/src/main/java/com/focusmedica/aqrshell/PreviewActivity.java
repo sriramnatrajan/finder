@@ -50,6 +50,7 @@ String url, titleName;
     double screenInches;
     android.widget.ProgressBar spinner;   DataModel dataModel;
     String a0,a1,a2,a3;RelativeLayout mRelativeLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

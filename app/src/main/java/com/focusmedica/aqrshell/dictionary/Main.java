@@ -18,8 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.focusmedica.aqrshell.R;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -47,26 +45,26 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
     String  vdoname,filterVideoName;
     Content.ListAdapter mListAdapter;
     Content c;Context mContext;
-String[] dbvalues;
+    String[] dbvalues;
+    String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        mTextView=(TextView)findViewById(R.id.title);
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main);
+    mTextView=(TextView)findViewById(R.id.title);
 
-        if(getResources().getBoolean(R.bool.portrait_only)){
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+    if(getResources().getBoolean(R.bool.portrait_only)){
+     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
         Intent i=getIntent();
           thumb=i.getStringExtra("thumbinfo");
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         ActionBar mActionBar = getActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
+
 
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         ImageView info=(ImageView)mCustomView.findViewById(R.id.imageView4);
@@ -90,7 +88,8 @@ String[] dbvalues;
         });
      onArticleSelected("A");
 
-        /*       iv_download.setOnClickListener(new View.OnClickListener() {
+
+     /*iv_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
               //TextView tv=(TextView)findViewById(R.id.textView3);
@@ -107,6 +106,7 @@ String[] dbvalues;
 
             }
         });*/
+
     }
 
     @Override
@@ -117,7 +117,7 @@ String[] dbvalues;
      try {
          videoDetails = handler.getVideoFileName(firstcharacter);
          DIctionaryContent item = videoDetails.get(0);
-         String name = item.getVDOname();
+         name = item.getVDOname();
          if (!videoDetails.isEmpty()) {
              if (new File("data/data/com.focusmedica.aqrshell/files/" +name).exists()) {
                  iv_download.setVisibility(View.INVISIBLE);
@@ -141,12 +141,11 @@ String[] dbvalues;
                         String name = item.getVDOname();
                         name = name.replaceAll(" ", "%20");
                         Log.d("File: ", url + name);
-
                         new DownloadFileFromURL(url + name, name).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                     }
                 }
-
+                handler.close();
                 /*content=videoDetails.get(0);
                 Object[] i=videoDetails.toArray();
                 vdoname =content.getVDOname();
@@ -155,7 +154,6 @@ String[] dbvalues;
                 filterVideoName=vdoname.replaceAll(" ","%20");
                 Log.d("Object",  videoDetails.toString());
                 Log.d("VideoName", "++++++"+i);
-
             Log.d("VideoName",vdoname+"++++++"+ handler.getVideoFileName(firstcharacter));
                 *//*for(int i=0; i<videoDetails.size();i++){
                  // Log.d("VideoName",vdoname+"++++++"+i);
@@ -182,11 +180,13 @@ String[] dbvalues;
       }
 
     void complain(String message) {
+
         Log.e(TAG, "**** TrivialDrive Error: " + message);
         alert("Error: " + message);
     }
 
     void alert(String message) {
+
         AlertDialog.Builder bld = new AlertDialog.Builder(this);
         bld.setMessage(message);
         bld.setNeutralButton("OK", null);
@@ -197,7 +197,6 @@ String[] dbvalues;
     public  class DownloadFileFromURL extends AsyncTask<String, String, String> {
         private long total = 0L;
         private long lengthOfFile = 0L;
-
         private String mUrl;
         private String mName;
         public DownloadFileFromURL(String url, String name) {
@@ -247,7 +246,6 @@ String[] dbvalues;
             }
         }
 
-
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -257,17 +255,15 @@ String[] dbvalues;
                 conection.setRequestProperty("Accept-Encoding", "Identity");
                 conection.connect();
                 lengthOfFile = conection.getContentLength();
-
                 InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(getApplicationContext().getFilesDir()+"/"
-                        + mName);
+                OutputStream output = new FileOutputStream(getApplicationContext().getFilesDir()+"/"+ mName);
                 byte data[] = new byte[1024];
                 while ((count = input.read(data)) != -1 && !isCancelled()) {
                 if (isCancelled()) break;
+
                 total += count;
                     publishProgress("" + (int) ((total * 100) / lengthOfFile));
                     output.write(data, 0, count);
-
                 }
                 output.flush();
                 output.close();
@@ -287,6 +283,15 @@ String[] dbvalues;
 
         @Override
         protected void onPostExecute(String file_url) {
+            if (!videoDetails.isEmpty()) {
+                if (new File("data/data/com.focusmedica.aqrshell/files/" + name).exists()) {
+                    if (iv_download.isClickable()) {
+                        iv_download.setVisibility(View.INVISIBLE);
+                    } else {
+                        iv_download.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
             handler.close();
                 if (pDialog.isShowing())pDialog.dismiss();
              if (!isCancelled()) {

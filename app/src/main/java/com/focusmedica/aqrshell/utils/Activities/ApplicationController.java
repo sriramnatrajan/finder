@@ -2,13 +2,13 @@ package com.focusmedica.aqrshell.utils.Activities;
 
 import android.app.Application;
 import android.text.TextUtils;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 
-public class 	ApplicationController extends Application {
+
+public class ApplicationController extends Application {
 
 	public static final String TAG = ApplicationController.class.getSimpleName();
 

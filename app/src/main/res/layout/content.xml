@@ -23,7 +23,6 @@
 
     <LinearLayout
         android:layout_below="@+id/title"
-        android:layout_above="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -45,7 +44,7 @@
         android:layout_weight="8" />
 
     </LinearLayout>
-
+<!--
     <com.google.android.gms.ads.AdView
         android:background="#51433A"
         android:id="@+id/adView"
@@ -55,6 +54,6 @@
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.AdView>
+    </com.google.android.gms.ads.AdView>-->
 
 </RelativeLayout>

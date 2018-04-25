@@ -17,7 +17,6 @@ import android.widget.ListView;
 import com.focusmedica.aqrshell.AppListHandler;
 import com.focusmedica.aqrshell.DataModel;
 import com.focusmedica.aqrshell.ItemAdapter;
-import com.focusmedica.aqrshell.MyDataBase;
 import com.focusmedica.aqrshell.PreviewActivity;
 import com.focusmedica.aqrshell.R;
 import com.focusmedica.aqrshell.dbHandler.SQLiteHandler;
@@ -34,7 +33,7 @@ public class CollectionsActivity extends Activity {
     ArrayList<DataModel> chapterList;
     ArrayList<DataModel> appList;
     ArrayList<DataModel> appDetails;
-    MyDataBase myDataBase;
+   // MyDataBase myDataBase;
     DataModel dataModel;
     AppListHandler appListHandler;
     SQLiteHandler mSqLiteHandler;
@@ -56,7 +55,7 @@ public class CollectionsActivity extends Activity {
                 ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         imageView.setLayoutParams(layoutParams);
         actionBar.setCustomView(imageView);
-        myDataBase=new MyDataBase(getApplicationContext());
+      //  myDataBase=new MyDataBase(getApplicationContext());
         appListHandler=new AppListHandler(this);
 
         chapterList=new ArrayList<>();

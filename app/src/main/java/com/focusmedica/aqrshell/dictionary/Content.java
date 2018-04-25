@@ -107,6 +107,24 @@ public class Content extends Fragment {
         Lview.setAdapter(adapter);
     }
 
+  /*@Override
+    public void onResume() {
+        super.onResume();
+        final Handler handler = new Handler();
+        do while(true){
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //Do something after 100ms
+                  Log.d("This is","Refreshing");
+                    //  Toast.makeText(getActivity(), "check", Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
+                    handler.postDelayed(this, 2000);
+                }
+            }, 1500);
+        }
+    }*/
+
     public class ListAdapter extends BaseAdapter implements View.OnClickListener{
         Context context;
 
@@ -153,6 +171,7 @@ public class Content extends Fragment {
                 viewHolder.title = (TextView) view.findViewById(R.id.textView);
                 viewHolder.content = (TextView) view.findViewById(R.id.textView2);
 
+
                 viewHolder.img=(ImageView)view.findViewById(R.id.imageView);
 
                 view.setTag(viewHolder);
@@ -172,7 +191,6 @@ public class Content extends Fragment {
             viewHolder.content.setText(content.getDescription());
             viewHolder.img.setTag(content.getVDOname());
             viewHolder.img.setId(position);
-//           System.out.println("premium" + ispremium);
             String lower_case=content.getVDOname().toLowerCase().substring(0, content.getVDOname().indexOf(".")).replaceAll(" ", "").replaceAll("-","");
 
         /*    if(ispremium==true) {

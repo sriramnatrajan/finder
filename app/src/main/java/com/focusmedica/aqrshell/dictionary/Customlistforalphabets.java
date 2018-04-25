@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.focusmedica.aqrshell.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Lokesh on 15-Feb-16.
@@ -20,12 +19,7 @@ public class Customlistforalphabets extends BaseAdapter {
     ArrayList<DIctionaryContent> listcontent;
     Context context;
     int selected=0;
-   List contents;
    DIctionaryContent mDIctionaryContent;
-   Mydatabase myDataBase;
-    String[] character={"A","B","C","D","G","H",
-                        "I","L","M",
-                        "O","P","R","S","T","U", "W" };
 
     public Customlistforalphabets(Context context, ArrayList listcontent){
         this.context = context;

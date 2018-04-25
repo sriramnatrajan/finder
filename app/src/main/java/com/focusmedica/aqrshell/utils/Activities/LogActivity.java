@@ -233,11 +233,7 @@ public class LogActivity extends Activity {
                         Toast.makeText(LogActivity.this, "please enter valid credential", Toast.LENGTH_LONG).show();
                     } else {
                         session.setLogin(true);
-                        //response(name,value,appid,appInfo);
-                        /*Intent intent = new Intent(LogActivity.this, CollectionsActivity.class);
-                        intent.putExtra("titleId",res);
-                        Log.d("@@@", "title=" + res);
-                        startActivity(intent);*/
+
                         finish();
                         pDialog1.dismiss();
                     }
@@ -253,7 +249,6 @@ public class LogActivity extends Activity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
 
             }
         });
