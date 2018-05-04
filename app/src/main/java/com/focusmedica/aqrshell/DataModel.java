@@ -20,6 +20,15 @@ public class DataModel {
 
     String description;
 
+    public String getAppFolder() {
+        return appFolder;
+    }
+
+    public void setAppFolder(String appFolder) {
+        this.appFolder = appFolder;
+    }
+
+    String appFolder;
     String name;
     String value;
     String app_id;

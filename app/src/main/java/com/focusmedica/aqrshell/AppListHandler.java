@@ -21,7 +21,8 @@ public class AppListHandler extends SQLiteOpenHelper {
     private static final String KEY_APPID = "app_id";
     //private static final String KEY_CREATED_AT = "created_at";
     private static final String KEY_INFO ="appInfo";
-
+    private static final String KEY_TYPE ="app_type";
+    private static final String KEY_FOLDER="app_folder";
     //String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+" ("+KEY_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+KEY_NAME+" TEXT,"+ KEY_DLINK +" TEXT)";
     //String DROP_TABLE = "DROP TABLE IF EXISTS "+TABLE_NAME;
 
@@ -34,8 +35,11 @@ public class AppListHandler extends SQLiteOpenHelper {
         db.execSQL("create table " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT NOT NULL unique, " +
                 "value TEXT NOT NULL, " +
-                 "app_id TEXT NOT NULL unique,"+
+                "app_id TEXT NOT NULL unique,"+
+                "app_type TEXT NOT NULL, "+
+             //   "app_folder TEXT NOT NULL,"+
                 "appInfo TEXT NOT NULL)");
+
     }
 
     @Override
@@ -52,6 +56,8 @@ public class AppListHandler extends SQLiteOpenHelper {
             values.put(KEY_VALUE, city.getValue());
             values.put(KEY_APPID, city.getApp_id());
             values.put(KEY_INFO,city.getAppInfo());
+            values.put(KEY_TYPE,city.getApp_type());
+        //    values.put(KEY_FOLDER,city.getAppFolder());
             long result = db.insert(TABLE_NAME, null, values);
 
             if(result == -1){
@@ -76,7 +82,7 @@ public class AppListHandler extends SQLiteOpenHelper {
         ArrayList<DataModel> chapterList = null;
         try{
             chapterList = new ArrayList<DataModel>();
-            String QUERY = "SELECT name,value,app_id,appInfo FROM app_table";
+            String QUERY = "SELECT name,value,app_id,appInfo ,app_type FROM app_table";
             Cursor cursor = db.rawQuery(QUERY, null);
             if(!cursor.isLast())
             {
@@ -88,6 +94,8 @@ public class AppListHandler extends SQLiteOpenHelper {
                     chapter.setValue(cursor.getString(1));
                     chapter.setApp_id(cursor.getString(2));
                     chapter.setAppInfo(cursor.getString(3));
+                    chapter.setApp_type(cursor.getString(4));
+                   // chapter.setAppFolder(cursor.getString(5));
                     chapterList.add(chapter);
                     Log.d("@@@","adapter="+chapterList.size());
 
@@ -99,17 +107,16 @@ public class AppListHandler extends SQLiteOpenHelper {
         }
         return chapterList;
     }
+    public ArrayList<DataModel> getItemList(String titleName) {
 
-    public Cursor getItemList(String query){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<DataModel> chapterList = null;
 
             chapterList = new ArrayList<DataModel>();
             //String QUERY="SELECT titleName,titlePages,titleDlink FROM Titles where memberName='"+titleID+"'";
-            String QUERY = "SELECT * FROM app_table where _name='"+query+"'";
+            String QUERY = "SELECT * FROM app_table where _name='"+titleName+"'";
             Cursor cursor = db.rawQuery(QUERY, null);
-            if(cursor!=null&&cursor.moveToFirst())
-            {
+            if(cursor!=null&&cursor.moveToFirst()) {
                 do
                 {
                     DataModel chapter = new DataModel();
@@ -128,6 +135,7 @@ public class AppListHandler extends SQLiteOpenHelper {
             cursor.close();
             return null;
         }
-        return cursor;
+        return chapterList;
     }
 }
+

@@ -52,20 +52,24 @@ public class Content extends Fragment {
     String vdoname,firstchar;
     ProgressDialog pDialog;
     int img_position,flag=0;
- //   Boolean ispremium=true;
+    //Boolean ispremium=true;
     View mView;  String videofileName;
     ArrayList<DIctionaryContent> AppDetails=new ArrayList<>();
     String linkStr;
+    ImageView iv_download;
     String name,description; ListAdapter.ViewHolder mViewHolder; String a0,a1;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_content, container, false);
-
         mdatabase = new Mydatabase(getActivity().getApplicationContext(), "");
         mdatabase.openDataBase();
-      ;
         Lview=(ListView)rootView.findViewById(R.id.listView);
         adapter=new ListAdapter(getActivity(),"A");
+        LayoutInflater mInflater = LayoutInflater.from(getActivity());
+        View   mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        iv_download=(ImageView)mCustomView.findViewById(R.id.iv_download);
 
         SharedPreferences appInfo = getActivity().getSharedPreferences("appInfo", getActivity().MODE_PRIVATE);
         //ispremium= appInfo.getBoolean("isPremium",false);
@@ -227,13 +231,14 @@ public class Content extends Fragment {
                 }
             }else{*/
                 if (new File("data/data/com.focusmedica.aqrshell/files/" + content.getVDOname()).exists()) {
+                    iv_download.setVisibility(View.INVISIBLE);
                     viewHolder.img.setImageResource(R.drawable.play_pressed);
                     viewHolder.title.setTextColor(Color.parseColor("#ffffff"));
                     viewHolder.content.setTextColor(Color.parseColor("#ffffff"));
 
                 }else if ( getActivity().getResources().getIdentifier(lower_case,
                         "raw",getActivity().getPackageName())!=0) {
-
+                    iv_download.setVisibility(View.INVISIBLE);
                     viewHolder.img.setImageResource(R.drawable.play_pressed);
                     viewHolder.title.setTextColor(Color.parseColor("#ffffff"));
                     viewHolder.content.setTextColor(Color.parseColor("#ffffff"));
@@ -280,8 +285,8 @@ public class Content extends Fragment {
 
                         AppDetails=mdatabase.getAppDetail();
                         content=AppDetails.get(0);
-                       linkStr=content.getDlink();
-                       asyncobj.execute(linkStr+videofileName);
+                        linkStr=content.getDlink();
+                        asyncobj.execute(linkStr+videofileName);
 
                     }else if(viewHolder.img.getDrawable().getConstantState().equals
                             (ContextCompat.getDrawable(context, R.drawable.play_pressed).getConstantState())){
@@ -296,6 +301,9 @@ public class Content extends Fragment {
             });
             mdatabase.close();
             return view;
+        }
+        public void updateData(){
+            this.notifyDataSetChanged();
         }
     }
 

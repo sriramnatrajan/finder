@@ -112,7 +112,7 @@ public class Mydatabase  extends SQLiteOpenHelper {
     }
 
     public ArrayList<DIctionaryContent> getVideoFileName(String ch) {
-        String[] array;
+
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<DIctionaryContent> imageList = new ArrayList<DIctionaryContent>();
         try {
@@ -122,7 +122,7 @@ public class Mydatabase  extends SQLiteOpenHelper {
             Cursor mCursor = db.rawQuery(QUERY, null);
 
             if (!mCursor.isLast()) {
-                 array=new String[mCursor.getCount()];
+
                  DIctionaryContent m=new DIctionaryContent();
 
                 int i=0;
@@ -131,10 +131,7 @@ public class Mydatabase  extends SQLiteOpenHelper {
                     DIctionaryContent chapter = new DIctionaryContent();
                     chapter.setVDOname(mCursor.getString(0));
                     String si=mCursor.getString(mCursor.getColumnIndex("WVideoName"));
-                    array[i]=si;
 
-                    chapter.setNameOfVid(array);
-                    i++;
                     //chapter.setVDOname(mCursor.getString(mCursor.getColumnIndex("WVideoName")));
                     imageList.add(chapter);
                 }
@@ -191,6 +188,7 @@ public class Mydatabase  extends SQLiteOpenHelper {
                 throw new RuntimeException("Error creating source database", e);
             }
         }
+
         return SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.CREATE_IF_NECESSARY);
     }
 

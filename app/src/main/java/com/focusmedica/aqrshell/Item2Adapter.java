@@ -13,43 +13,22 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
 
-
-public class ItemAdapter extends BaseAdapter{
+public class Item2Adapter extends BaseAdapter {
     ArrayList<DataModel> listcontent;
     Context context;
     DataModel content;
     String url;
     String chapterName;
-    String chapterImage,appfolder;
-    private ArrayList<String> mData = new ArrayList<String>();
-    String chapterImage1;private static final int TYPE_ITEM = 0;
-    private static final int TYPE_SEPARATOR = 1;
-    Cursor mCursor;private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
-
-    public ItemAdapter(Context context, ArrayList listcontent) {
+    String chapterImage;
+    String chapterImage1;
+    Cursor mCursor;
+    public Item2Adapter(Context context, ArrayList listcontent) {
         this.context = context;
 
         this.listcontent = listcontent;
     }
 
-public void addItem(final String item){
-       mData.add(item);
-       notifyDataSetChanged();
-}
-
-public void addSectionHeaderItem(final String item){
-    mData.add(item);
-    sectionHeader.add(mData.size()-1);
-    notifyDataSetChanged();
-
-}
-
-    @Override
-    public int getItemViewType(int position) {
-        return sectionHeader.contains(position)?TYPE_SEPARATOR:TYPE_ITEM;
-    }
 
     @Override
     public int getCount() {
@@ -75,32 +54,29 @@ public void addSectionHeaderItem(final String item){
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        final ViewHolder viewHolder;
+        final Item2Adapter.ViewHolder viewHolder;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.content_layout, null);
-            viewHolder = new ViewHolder();
+            viewHolder = new Item2Adapter.ViewHolder();
             viewHolder.chapter = (TextView) view.findViewById(R.id.chapter_tv);
             viewHolder.chapter_thumb=(ImageView)view.findViewById(R.id.chapter_thumb_iv);
-         //   viewHolder.chapter_arrow=(ImageView)view.findViewById(R.id.image_arrow);
-
+            //viewHolder.chapter_arrow=(ImageView)view.findViewById(R.id.image_arrow);
             //  viewHolder.chapter.getResources().getColor(R.color.md_black_1000);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) view.getTag();
+            viewHolder = (Item2Adapter.ViewHolder) view.getTag();
         }
         content = (DataModel) listcontent.get(position);
         Log.d("TAGG+++",chapterName+","+chapterImage+","+chapterImage1);
         chapterName=content.getName();
         chapterImage=content.getValue();
         chapterImage1=content.getApp_id();
-        appfolder=content.getApp_id();
         viewHolder.chapter.setText(chapterName);
-        Log.d("TAGG+++",chapterName+","+chapterImage+","+appfolder);
-
+        Log.d("TAGG+++",chapterName+","+chapterImage+","+chapterImage1);
         // viewHolder.chapter.setTextColor(000000);
-        Log.d("TAGG+++",chapterImage+"/"+appfolder+"_thumbnail.png");
-        Glide.with(context).load(chapterImage+"/"+appfolder+"_thumbnail"+".png").into(viewHolder.chapter_thumb);
+        Log.d("TAGG+++",chapterImage+"/"+chapterImage1+"_thumbnail.png");
+        Glide.with(context).load(chapterImage+"/"+chapterImage1+"_thumbnail"+".png").into(viewHolder.chapter_thumb);
         return view;
     }
     public void swapCursor(Cursor newCursor) {

@@ -1,5 +1,6 @@
 package com.focusmedica.aqrshell;
 
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -35,7 +36,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -74,12 +74,13 @@ public class MediaPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
     String vdoname,language,titleName;
     //persmission method.
     public static void verifyStoragePermissions(Activity activity) {
-        // Check if we have read or write permission
+         // Check if we have read or write permission
         int writePermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int readPermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
 
         if (writePermission != PackageManager.PERMISSION_GRANTED || readPermission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
+
+            //We don't have permission so prompt the user
             ActivityCompat.requestPermissions(
                     activity,
                     PERMISSIONS_STORAGE,
@@ -105,12 +106,7 @@ public class MediaPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
         linear.setVisibility(View.INVISIBLE);
         util = new Utilities();
         Bundle extras = getIntent().getExtras();
-
-
-
-
         final String video_name = extras.getString("title");
-
         /*vdoname=getIntent().getStringExtra("vdoname");
         language=getIntent().getStringExtra("language");
         titleName=getIntent().getStringExtra("titleName");*/
@@ -122,7 +118,7 @@ public class MediaPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
             String time = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
             vDuration = Integer.parseInt(time );
 
-        playVideo(uri);
+            playVideo(uri);
 
         relate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +164,7 @@ public class MediaPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
                 }
             }
         });
+
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -372,6 +369,7 @@ public class MediaPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
             videoProgress.setProgress(progress);
             // Running this thread after 100 milliseconds
             mHandler.postDelayed(this, 100);
+
         }
     };
 

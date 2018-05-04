@@ -86,7 +86,7 @@ public class LogActivity extends Activity {
             Intent intent = new Intent(LogActivity.this, CollectionsActivity.class);
             startActivity(intent);
             finish();
-        }
+    }
         // Login button Click Event
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -134,7 +134,7 @@ public class LogActivity extends Activity {
             if (!titleId.isEmpty()&!password.isEmpty()){
                 ServiceApi serviceApi = ApiCaller.getInstance().getServicesApi();
 
-                Map<String, String> params = new HashMap<String, String>();
+                final Map<String, String> params = new HashMap<String, String>();
                 //  params.put("code", voucher);
                 params.put("username", titleId);
                 params.put("password",password);
@@ -169,11 +169,14 @@ public class LogActivity extends Activity {
                                 // JSONObject user = jObj.getJSONObject("res");
                                 String name = jObj.getString("name");
                                 String value = jObj.getString("value");
-                                String appid = jObj.getString("app_id");
+                                String appid = jObj.getString("app_folder");
                                 String appInfo=jObj.getString("app_info");
                                 String apptype=jObj.getString("app_type");
+                                String appfolder=jObj.getString("app_folder");
+                                int a00=Integer.parseInt(apptype);
 
-                                  db.addUser(name,value,appid,appInfo,apptype);
+                                db.addUser(name,value,appid,appInfo,apptype);
+
                                 // Launch main activity
                                 Intent intent = new Intent(LogActivity.this,
                                         CollectionsActivity.class);

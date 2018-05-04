@@ -138,24 +138,21 @@ public class RegisterActivity extends Activity {
                         String created_at = user
                                 .getString("created_at");
                         String apptye=user.getString("app_type");
+                        String appFolder=user.getString("app_folder");
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at,apptye);
 
                         Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 
                         // Launch login activity
-                        Intent intent = new Intent(
-                                RegisterActivity.this,
-                                LogActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, LogActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-
                         // Error occurred in registration. Get the error
                         // message
                         String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -33,6 +33,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	private static final String KEY_APPID = "app_id";
 	private static final String KEY_APPTYPE= "app_type";
 	private static final String KEY_INFO ="appInfo";
+	private static final String KEY_FOLDER="app_folder";
 
 	public SQLiteHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -46,6 +47,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 				+ KEY_VALUE + " TEXT,"
 				+ KEY_APPID + " TEXT,"
 				+ KEY_APPTYPE+ " INTEGER,"
+			//	+ KEY_FOLDER+"INTEGER, "
 				+ KEY_INFO +" TEXT" + ")";
 		db.execSQL(CREATE_LOGIN_TABLE);
 		Log.d(TAG, "Database tables created");
@@ -64,7 +66,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	/**
 	 * Storing user details in database
 	 * */
-	public void addUser(String name, String value, String uid, String appInfo,String appType) {
+	public void addUser(String name, String value, String uid, String appInfo, String appType) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -73,12 +75,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 		values.put(KEY_APPID, uid); // Email
 		values.put(KEY_INFO, appInfo);
 		values.put(KEY_APPTYPE,appType);// Created At
-		//values.put(KEY_INFO);
+		//values.put(KEY_FOLDER,appFolder);
+
 		// Inserting Row
 		long id = db.insert(TABLE_USER, null, values);
 		db.close(); // Closing database connection
 		Log.d(TAG, "New user inserted into sqlite: " + id);
 	}
+
 
 	public ArrayList<DataModel> getDetails(String titleName) {
 
@@ -100,6 +104,37 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 					images.setApp_id(mCursor.getString(2));
 					images.setAppInfo(mCursor.getString(3));
 					images.setApp_type(mCursor.getString(4));
+					//images.setAppFolder(mCursor.getString(5));
+					imageList.add(images);
+				}
+			}
+			db.close();
+		} catch (Exception e) {
+			Log.e("TITLE NAME", e + "" + e.getMessage());
+		}
+		return imageList;
+	}
+	public ArrayList<DataModel> getUnd(String apptype ) {
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		ArrayList<DataModel> imageList = null;
+		try {
+			imageList = new ArrayList<DataModel>();
+			String QUERY = "SELECT name,value,app_id,appInfo,app_type FROM user where app_type='" + apptype+ "'";
+
+			//String QUERY = "SELECT  * FROM " + TABLE_USER;
+			//memberName name changes
+			Cursor mCursor = db.rawQuery(QUERY, null);
+
+			if (!mCursor.isLast()) {
+				while (mCursor.moveToNext()) {
+					DataModel images = new DataModel();
+					images.setName(mCursor.getString(0));
+					images.setValue(mCursor.getString(1));
+					images.setApp_id(mCursor.getString(2));
+					images.setAppInfo(mCursor.getString(3));
+					images.setApp_type(mCursor.getString(4));
+					//images.setAppFolder(mCursor.getString(5));
 					imageList.add(images);
 				}
 			}
