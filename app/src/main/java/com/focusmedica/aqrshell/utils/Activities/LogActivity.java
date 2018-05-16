@@ -3,11 +3,15 @@ package com.focusmedica.aqrshell.utils.Activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,9 +52,10 @@ public class LogActivity extends Activity {
         setContentView(R.layout.activity_log);
 
         inputCode=(EditText)findViewById(R.id.coupon_id);
+
         inputPassword = (EditText) findViewById(R.id.password);
        btnLogin = (Button) findViewById(R.id.btnLogin);
-      /*  btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+      /*btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
        btnLinkToRegister.setVisibility(View.INVISIBLE);*/
         final ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
@@ -92,16 +97,24 @@ public class LogActivity extends Activity {
 
             public void onClick(View view) {
                 // String email = inputEmail.getText().toString().trim();
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 String password = inputPassword.getText().toString().trim();
                 String titleId=inputCode.getText().toString().trim();
 
                 if ( !titleId.isEmpty()&!password.isEmpty()) {
-                    login();
-                    pDialog1 = new ProgressDialog(LogActivity.this);
-                    pDialog1.setMessage("Please Wait...");
-                    pDialog1.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    pDialog1.setCancelable(false);
-                    pDialog1.show();
+                    if (!haveNetworkConnection()){
+                        Toast.makeText(LogActivity.this, "No Connection", Toast.LENGTH_SHORT).show();
+                    pDialog.dismiss();
+                    }else{
+                        login();
+                        pDialog1 = new ProgressDialog(LogActivity.this);
+                        pDialog1.setMessage("Please Wait...");
+                        pDialog1.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        pDialog1.setCancelable(false);
+                        pDialog1.show();
+
+                    }
 
                 } else {
 
@@ -113,8 +126,8 @@ public class LogActivity extends Activity {
             }
 
         });
-/*
-        btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
+
+    /*      btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
@@ -123,6 +136,7 @@ public class LogActivity extends Activity {
                 finish();
             }
         });*/
+
     }
     void login(){
         try{
@@ -138,7 +152,6 @@ public class LogActivity extends Activity {
                 //  params.put("code", voucher);
                 params.put("username", titleId);
                 params.put("password",password);
-
 
                 Call<String> call = serviceApi.getLogingResult(params);
                 call.enqueue(new Callback<String>() {
@@ -177,20 +190,21 @@ public class LogActivity extends Activity {
 
                                 db.addUser(name,value,appid,appInfo,apptype);
 
+
+
+
                                 // Launch main activity
                                 Intent intent = new Intent(LogActivity.this,
                                         CollectionsActivity.class);
-                                intent.putExtra("name",name);
+                              //  intent.putExtra("name",name);
                                 Toast.makeText(getApplicationContext(), "name=" +name, Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
                                 finish();
                                 hideDialog();
-
                             } catch (JSONException e) {
                                 // JSON error
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "Incorrect code", Toast.LENGTH_LONG).show();
-
                                 //Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                             }
 
@@ -265,6 +279,22 @@ public class LogActivity extends Activity {
     private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
+    }
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 }
     /**

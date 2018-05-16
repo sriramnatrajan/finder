@@ -20,6 +20,22 @@ public class DataModel {
 
     String description;
 
+    String appFolder;
+    String name;
+    String value;
+    String app_id;
+
+    String appInfo;
+    String app_type;
+   public DataModel(String mName,String mValue,String mAppInfo,String mAppId,String mAppType ){
+        name=mName;
+        value=mValue;
+        appInfo=mAppInfo;
+        app_id=mAppId;
+        app_type=mAppType;
+    }
+
+
     public String getAppFolder() {
         return appFolder;
     }
@@ -28,10 +44,6 @@ public class DataModel {
         this.appFolder = appFolder;
     }
 
-    String appFolder;
-    String name;
-    String value;
-    String app_id;
 
     public String getApp_type() {
         return app_type;
@@ -41,7 +53,6 @@ public class DataModel {
         this.app_type = app_type;
     }
 
-    String app_type;
     public String getValue() {
         return value;
     }
@@ -66,7 +77,6 @@ public class DataModel {
         this.appInfo = appInfo;
     }
 
-    String appInfo;
 
     public String getName() {
         return name;

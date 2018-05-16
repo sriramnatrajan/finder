@@ -1,7 +1,6 @@
 package com.focusmedica.aqrshell;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,38 +16,27 @@ import java.util.TreeSet;
 
 
 public class ItemAdapter extends BaseAdapter{
-    ArrayList<DataModel> listcontent;
+    ArrayList<Object> listcontent;
     Context context;
     DataModel content;
     String url;
     String chapterName;
     String chapterImage,appfolder;
-    private ArrayList<String> mData = new ArrayList<String>();
-    String chapterImage1;private static final int TYPE_ITEM = 0;
+    String chapterImage1;
+    private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
-    Cursor mCursor;private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
+    private static final int TYPE_MAX_COUNT=TYPE_SEPARATOR+1;
+      ViewHolder viewHolder;
+    private TreeSet<Integer> mSeperatorSet= new TreeSet<Integer>();
+    private ArrayList<String> mData = new ArrayList<String>();
+    private ArrayList<DataModel> str = new ArrayList<DataModel>();
+    private LayoutInflater mInflater;
 
-    public ItemAdapter(Context context, ArrayList listcontent) {
+
+    public ItemAdapter(Context context, ArrayList<Object> listcontent ) {
         this.context = context;
-
         this.listcontent = listcontent;
-    }
-
-public void addItem(final String item){
-       mData.add(item);
-       notifyDataSetChanged();
-}
-
-public void addSectionHeaderItem(final String item){
-    mData.add(item);
-    sectionHeader.add(mData.size()-1);
-    notifyDataSetChanged();
-
-}
-
-    @Override
-    public int getItemViewType(int position) {
-        return sectionHeader.contains(position)?TYPE_SEPARATOR:TYPE_ITEM;
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -57,14 +45,30 @@ public void addSectionHeaderItem(final String item){
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+    @Override
     public Object getItem(int position) {
         return listcontent.get(position);
     }
 
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public int getItemViewType(int position) {
+        if (getItem(position) instanceof  DataModel) {
+            return TYPE_ITEM;
+        }
+        return TYPE_SEPARATOR;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return (getItemViewType(position)==TYPE_ITEM);
     }
 
     class ViewHolder {
@@ -75,41 +79,50 @@ public void addSectionHeaderItem(final String item){
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        final ViewHolder viewHolder;
+     //   final ViewHolder viewHolder;
+        int rowType = getItemViewType(position);
+        viewHolder = new ViewHolder();
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.content_layout, null);
-            viewHolder = new ViewHolder();
-            viewHolder.chapter = (TextView) view.findViewById(R.id.chapter_tv);
-            viewHolder.chapter_thumb=(ImageView)view.findViewById(R.id.chapter_thumb_iv);
-         //   viewHolder.chapter_arrow=(ImageView)view.findViewById(R.id.image_arrow);
 
-            //  viewHolder.chapter.getResources().getColor(R.color.md_black_1000);
+            switch (rowType) {
+                case TYPE_ITEM:
+                    view = mInflater.inflate(R.layout.content_layout, viewGroup,false);
+                    /*viewHolder.chapter = (TextView) view.findViewById(R.id.chapter_tv);
+                    viewHolder.chapter_thumb=(ImageView)view.findViewById(R.id.chapter_thumb_iv);*/
+                    break;
+                case TYPE_SEPARATOR:
+                    view = mInflater.inflate(R.layout.list_group, viewGroup,false);
+                    // viewHolder.chapter=(TextView)view.findViewById(R.id.expand_title);
+                    break;
+            }
+
+
+        switch (rowType){
+            case TYPE_ITEM:
+              DataModel  content = (DataModel) getItem(position);
+                viewHolder.chapter = (TextView) view.findViewById(R.id.chapter_tv);
+                viewHolder.chapter_thumb=(ImageView)view.findViewById(R.id.chapter_thumb_iv);
+                chapterName=content.getName();
+                chapterImage=content.getValue();
+                chapterImage1=content.getApp_id();
+                appfolder=content.getApp_id();
+                viewHolder.chapter.setText(chapterName);
+                Log.d("TAGG+++",chapterName+","+chapterImage+","+chapterImage1);
+                Glide.with(context).load(chapterImage+"/"+appfolder+"_thumbnail"+".png").into(viewHolder.chapter_thumb);
+                break;
+            case TYPE_SEPARATOR:
+                TextView mTextView=(TextView)view.findViewById(R.id.expand_title);
+                String titleString = (String)getItem(position);
+                mTextView.setText(titleString);
+                break;
+        }
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
-        }
-        content = (DataModel) listcontent.get(position);
-        Log.d("TAGG+++",chapterName+","+chapterImage+","+chapterImage1);
-        chapterName=content.getName();
-        chapterImage=content.getValue();
-        chapterImage1=content.getApp_id();
-        appfolder=content.getApp_id();
-        viewHolder.chapter.setText(chapterName);
-        Log.d("TAGG+++",chapterName+","+chapterImage+","+appfolder);
 
-        // viewHolder.chapter.setTextColor(000000);
-        Log.d("TAGG+++",chapterImage+"/"+appfolder+"_thumbnail.png");
-        Glide.with(context).load(chapterImage+"/"+appfolder+"_thumbnail"+".png").into(viewHolder.chapter_thumb);
-        return view;
-    }
-    public void swapCursor(Cursor newCursor) {
-        // Always close the previous mCursor first
-        if (mCursor != null) mCursor.close();
-        mCursor = newCursor;
-        if (newCursor != null) {
-            // Force the RecyclerView to refresh
-            this.notifyDataSetChanged();
         }
+        return view;
+
     }
+
 }

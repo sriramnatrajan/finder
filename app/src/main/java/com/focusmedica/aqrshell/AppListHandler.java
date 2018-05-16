@@ -89,7 +89,7 @@ public class AppListHandler extends SQLiteOpenHelper {
 
                 while (cursor.moveToNext())
                 {
-                    DataModel chapter = new DataModel();
+                    DataModel chapter = new DataModel(null,null,null,null,null);
                     chapter.setName(cursor.getString(0));
                     chapter.setValue(cursor.getString(1));
                     chapter.setApp_id(cursor.getString(2));
@@ -119,7 +119,7 @@ public class AppListHandler extends SQLiteOpenHelper {
             if(cursor!=null&&cursor.moveToFirst()) {
                 do
                 {
-                    DataModel chapter = new DataModel();
+                    DataModel chapter = new DataModel(null,null,null,null,null);
                     chapter.setTitleName(cursor.getString(0));
                     chapter.setTitlePages(cursor.getString(1));
                     chapter.setDlink(cursor.getString(2));

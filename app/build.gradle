@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.focusmedica.aqrshell"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,6 +20,7 @@ android {
 
 dependencies {
 //    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-v13:26.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
@@ -37,7 +38,8 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     // compile 'com.android.volley:volley:1.0.0'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
-
+    compile 'com.github.matecode:Snacky:1.0.3'
+    compile 'com.commonsware.cwac:merge:1.1.2'
     // compile files('libs/library-1.0.0.jar')
 
     android {

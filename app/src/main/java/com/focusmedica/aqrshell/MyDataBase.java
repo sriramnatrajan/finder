@@ -40,7 +40,7 @@ public class MyDataBase extends SQLiteOpenHelper {
             Cursor cursor = db.rawQuery(QUERY, null);
             if (!cursor.isLast()) {
                 while (cursor.moveToNext()) {
-                    DataModel chapter = new DataModel();
+                    DataModel chapter = new DataModel(null,null,null,null,null);
                     chapter.setTitleId(cursor.getString(0));
                     chapter.setDescriptionData(cursor.getString(1));
                     chapter.setImageName(cursor.getString(2));
@@ -63,7 +63,7 @@ public class MyDataBase extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        DataModel chapter = new DataModel();
+        DataModel chapter = new DataModel(null,null,null,null,null);
 
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
@@ -88,7 +88,7 @@ public class MyDataBase extends SQLiteOpenHelper {
             Cursor cursor = db.rawQuery(QUERY, null);
             if (!cursor.isLast()) {
                 while (cursor.moveToNext()) {
-                    DataModel chapter = new DataModel();
+                    DataModel chapter = new DataModel(null,null,null,null,null);
                     chapter.setTitleId(cursor.getString(0));
                     chapter.setTitleName(cursor.getString(1));
                     chapter.setDescriptionData(cursor.getString(2));
@@ -113,7 +113,7 @@ public class MyDataBase extends SQLiteOpenHelper {
 
             if (!mCursor.isLast()) {
                 while (mCursor.moveToNext()) {
-                    DataModel images = new DataModel();
+                    DataModel images = new DataModel(null,null,null,null,null);
                     images.setTitleId(mCursor.getString(0));
                     images.setTitleName(mCursor.getString(1));
                     images.setDlink(mCursor.getString(2));
@@ -141,7 +141,7 @@ public class MyDataBase extends SQLiteOpenHelper {
 
             if (!mCursor.isLast()) {
                 while (mCursor.moveToNext()) {
-                    DataModel images = new DataModel();
+                    DataModel images = new DataModel(null,null,null,null,null);
                     images.setTitleName(mCursor.getString(0));
                     images.setTitlePages(mCursor.getString(1));
                     images.setDlink(mCursor.getString(2));
@@ -169,7 +169,7 @@ public class MyDataBase extends SQLiteOpenHelper {
 
             if (!mCursor.isLast()) {
                 while (mCursor.moveToNext()) {
-                    DataModel images = new DataModel();
+                    DataModel images = new DataModel(null,null,null,null,null);
                     images.setTitleName(mCursor.getString(0));
                     images.setTitlePages(mCursor.getString(1));
                     images.setDlink(mCursor.getString(2));
@@ -193,7 +193,7 @@ public class MyDataBase extends SQLiteOpenHelper {
             Cursor cursor = db.rawQuery(QUERY, null);
             if (!cursor.isLast()) {
                 while (cursor.moveToNext()) {
-                    DataModel chapter = new DataModel();
+                    DataModel chapter = new DataModel(null,null,null,null,null);
                     chapter.setInfo(cursor.getString(0));
                     chapter.setIAP(cursor.getString(1));
                     chapter.setKEY(cursor.getString(2));
@@ -216,7 +216,7 @@ public class MyDataBase extends SQLiteOpenHelper {
         if (cursorur == null) {
             return null;
         } else if (!cursorur.moveToFirst()) {
-            DataModel images = new DataModel();
+            DataModel images = new DataModel(null,null,null,null,null);
             images.setTitleName(cursorur.getString(0));
             images.setTitlePages(cursorur.getString(1));
             images.setDlink(cursorur.getString(2));
@@ -238,7 +238,7 @@ public class MyDataBase extends SQLiteOpenHelper {
         if (cursorur == null) {
             return null;
         } else if (!cursorur.moveToFirst()) {
-            DataModel images = new DataModel();
+            DataModel images = new DataModel(null,null,null,null,null);
             images.setTitleId(cursorur.getColumnName(0));
             images.setTitlePages(cursorur.getString(0));
             images.setDlink(cursorur.getString(1));

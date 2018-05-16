@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
     boolean mIsPremium = false;
     private Menu menu;
     private MenuItem item;
-    private ItemAdapter adapter;
+    private Item2Adapter adapter;
     private MyDataBase myDataBase;
     ArrayList<DataModel> appList;
     ArrayList<DataModel> appDetails;ArrayList<DataModel> chapterl;
@@ -151,7 +151,7 @@ public class MainActivity extends Activity {
         rvFiltered.setAdapter(mSearchAdapter);
 
         appListHandler =new AppListHandler(this);
-        adapter=new ItemAdapter(MainActivity.this,chapter);
+        adapter=new Item2Adapter (MainActivity.this,chapter );
         gridView.setAdapter(adapter);
 
         BottomNavigationView mBottomNavigationView=(BottomNavigationView)findViewById(R.id.bottom_navigation);

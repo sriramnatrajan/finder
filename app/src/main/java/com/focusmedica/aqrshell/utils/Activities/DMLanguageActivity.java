@@ -302,7 +302,7 @@ public class DMLanguageActivity extends Activity implements CancelListener{
                     String cityName = jsonObjectCity.getString("lname");
                     String url = jsonObjectCity.getString("url");
                     String cityDescription = jsonObjectCity.getString("description");
-                    DataModel city = new DataModel();
+                    DataModel city = new DataModel(null,null,null,null,null);
                     city.setName(cityName);
                     city.setState(url);
                     city.setDescription(cityDescription);

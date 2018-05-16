@@ -20,8 +20,7 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".utils.Activities.LogActivity">
+        <activity android:name=".utils.Activities.LogActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,11 +38,10 @@
         <activity
             android:name=".MediaPlayerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Info" />
+        <activity android:name=".dictionary.Info" />
         <activity android:name=".Notes" />
         <activity android:name=".Transcript" />
         <activity android:name=".ContentActivity" />
-
         <activity android:name=".utils.Activities.CollectionsActivity" />
         <activity android:name=".utils.Activities.DMLanguageActivity" />
         <activity android:name=".PageActivity" />
@@ -53,13 +51,11 @@
         <activity android:name=".utils.Activities.RegisterActivity" />
         <activity android:name=".PreviewActivity" />
         <activity android:name=".PlayActivity" />
-        <activity android:name=".dictionary.Firstpage"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity android:name=".dictionary.Main"/>
-        <activity android:name=".dictionary.VideoPlay2Activity"/>
-        <activity android:name=".dictionary.Info"/>
+        <activity
+            android:name=".dictionary.Firstpage"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".dictionary.Main" />
+        <activity android:name=".dictionary.VideoPlay2Activity" />
 
     </application>
 

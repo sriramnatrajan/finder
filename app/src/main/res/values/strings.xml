@@ -24,7 +24,9 @@
     <string name="title_activity_firstpage">Firstpage</string>
     <string name="Heading">Animated Pocket Dictionary of Cholesterol</string>
     <string name="content1"></string>
-    <string name="text_feedback">Feedback</string><!--
+    <string name="text_feedback">Feedback</string>
+    <string name="title_activity_tabbed">TabbedActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string><!--
     <string name="text_feedback_mail_id">apps@focusmedica.in</string>
     <string name="banner_ad_unit_id">ca-app-pub-8104924574021142/7151056710</string>-->
 </resources>

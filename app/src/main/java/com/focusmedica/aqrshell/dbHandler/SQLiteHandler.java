@@ -43,8 +43,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
-				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-				+ KEY_VALUE + " TEXT,"
+				+ KEY_ID + " INTEGER PRIMARY KEY,"
+				+ KEY_NAME + " TEXT NOT NULL UNIQUE,"
+				+ KEY_VALUE + " TEXT NOT NULL UNIQUE,"
 				+ KEY_APPID + " TEXT,"
 				+ KEY_APPTYPE+ " INTEGER,"
 			//	+ KEY_FOLDER+"INTEGER, "
@@ -66,7 +67,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	/**
 	 * Storing user details in database
 	 * */
-	public void addUser(String name, String value, String uid, String appInfo, String appType) {
+	public boolean addUser(String name, String value, String uid, String appInfo, String appType) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -78,12 +79,43 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 		//values.put(KEY_FOLDER,appFolder);
 
 		// Inserting Row
-		long id = db.insert(TABLE_USER, null, values);
+		long id = db.insertWithOnConflict(TABLE_USER, null, values,SQLiteDatabase.CONFLICT_REPLACE);
 		db.close(); // Closing database connection
 		Log.d(TAG, "New user inserted into sqlite: " + id);
+	return true;
 	}
 
 
+	public ArrayList<DataModel> getAppList(){
+		SQLiteDatabase db = this.getReadableDatabase();
+		ArrayList<DataModel> chapterList = null;
+		try{
+			chapterList = new ArrayList<DataModel>();
+			String QUERY = "SELECT name,value,app_id,appInfo,app_type FROM user ";
+			Cursor cursor = db.rawQuery(QUERY, null);
+			if(!cursor.isLast())
+			{
+
+				while (cursor.moveToNext())
+				{
+					DataModel chapter = new DataModel(null,null,null,null,null);
+					chapter.setName(cursor.getString(0));
+					chapter.setValue(cursor.getString(1));
+					chapter.setApp_id(cursor.getString(2));
+					chapter.setAppInfo(cursor.getString(3));
+					chapter.setApp_type(cursor.getString(4));
+					// chapter.setAppFolder(cursor.getString(5));
+					chapterList.add(chapter);
+					Log.d("@@@","adapter="+chapterList.size());
+
+				}
+			}
+			db.close();
+		}catch (Exception e){
+			Log.e("error", e + "");
+		}
+		return chapterList;
+	}
 	public ArrayList<DataModel> getDetails(String titleName) {
 
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -95,10 +127,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 			//String QUERY = "SELECT  * FROM " + TABLE_USER;
 			 //memberName name changes
 			Cursor mCursor = db.rawQuery(QUERY, null);
-
 			if (!mCursor.isLast()) {
 				while (mCursor.moveToNext()) {
-					DataModel images = new DataModel();
+					DataModel images = new DataModel(null,null,null,null,null);
 					images.setName(mCursor.getString(0));
 					images.setValue(mCursor.getString(1));
 					images.setApp_id(mCursor.getString(2));
@@ -106,6 +137,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 					images.setApp_type(mCursor.getString(4));
 					//images.setAppFolder(mCursor.getString(5));
 					imageList.add(images);
+
 				}
 			}
 			db.close();
@@ -120,7 +152,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 		ArrayList<DataModel> imageList = null;
 		try {
 			imageList = new ArrayList<DataModel>();
-			String QUERY = "SELECT name,value,app_id,appInfo,app_type FROM user where app_type='" + apptype+ "'";
+			String QUERY = "SELECT name,value,app_id,appInfo,app_type FROM user where app_type='" + apptype+ "' ";
 
 			//String QUERY = "SELECT  * FROM " + TABLE_USER;
 			//memberName name changes
@@ -128,7 +160,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
 			if (!mCursor.isLast()) {
 				while (mCursor.moveToNext()) {
-					DataModel images = new DataModel();
+					DataModel images = new DataModel(null,null,null,null,null);
 					images.setName(mCursor.getString(0));
 					images.setValue(mCursor.getString(1));
 					images.setApp_id(mCursor.getString(2));

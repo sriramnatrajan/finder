@@ -77,7 +77,7 @@ public class DBHandler extends SQLiteOpenHelper implements LanguageListner {
             {
                 while (cursor.moveToNext())
                 {
-                    DataModel dataModel = new DataModel();
+                    DataModel dataModel = new DataModel(null,null,null,null,null);
                     dataModel.setId(cursor.getInt(0));
                     dataModel.setName(cursor.getString(1));
                     dataModel.setState(cursor.getString(2));
