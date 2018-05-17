@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:background="@color/md_teal_A400"
+        android:background="@color/md_grey_200"
         android:textSize="24dp"
         android:textColor="@color/md_pink_600"
+        android:textAlignment="center"
         android:text="understanding disease"
+        android:typeface="sans"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/expand_title"/>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

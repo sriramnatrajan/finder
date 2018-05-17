@@ -2,7 +2,6 @@ package com.focusmedica.aqrshell.utils.Activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,13 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.focusmedica.aqrshell.AppListHandler;
 import com.focusmedica.aqrshell.DataModel;
-import com.focusmedica.aqrshell.ExpandableAdapter;
 import com.focusmedica.aqrshell.Item2Adapter;
 import com.focusmedica.aqrshell.ItemAdapter;
 import com.focusmedica.aqrshell.PreviewActivity;
@@ -27,8 +24,6 @@ import com.focusmedica.aqrshell.dbHandler.SQLiteHandler;
 import com.focusmedica.aqrshell.dictionary.Firstpage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class CollectionsActivity extends Activity {
     Button btnBack, btnAdd, btnSync;
@@ -38,23 +33,14 @@ public class CollectionsActivity extends Activity {
     ItemAdapter appListAdapter;
     Item2Adapter mItem2Adapter;
     ArrayList<DataModel> chapterList, chapterList2;
-    ArrayList<DataModel> appList;
+    ArrayList<DataModel> appList,appList1,appList3;
     ArrayList<DataModel> appDetails;
     int ik;
-    ArrayList<DataModel> chooseList = new ArrayList<>();
-    ArrayList<DataModel> chooseList2 = new ArrayList<DataModel>();
-    // MyDataBase myDataBase;
     DataModel dataModel, dataModel2;
     AppListHandler appListHandler;
-    DataModel content;
     SQLiteHandler mSqLiteHandler;
-    ExpandableAdapter mExpandableAdapter;
-    ExpandableListView mExpandableListView;
     String a0, a1, a2, a3, a4, a5;
-    int f0;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
-    Context mContext;
+    String b0,b1,b2,b3,b4,b5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,13 +81,16 @@ public class CollectionsActivity extends Activity {
             a3 = dataModel.getApp_id();
             a4 = dataModel.getApp_type();
             ik = Integer.parseInt(a4);
-            Log.d("@@@@@@@@@@@@@", a0 + a1 + a2 + a3 + a4 + a5);
+            Log.d("@@@@@@@@@@@@@", a0 + a1 + a2 + a3 + a4 );
             appListHandler.addAppList(dataModel);
         }
-        appList = mSqLiteHandler.getAppList();
+        appList = mSqLiteHandler.getUnd("1");
+        appList1=mSqLiteHandler.getUnd("2");
         Log.d("@@@", "size=" + appList.size());
-
+        Log.d("@@@", "appList1=" + appList1.size());
         dataModel = appList.get(0);
+        dataModel2 = appList1.get(0);
+
         a0 = dataModel.getName();
         a1 = dataModel.getValue();
         a2 = dataModel.getAppInfo();
@@ -109,56 +98,50 @@ public class CollectionsActivity extends Activity {
         a4 = dataModel.getApp_type();
         ik = Integer.parseInt(a4);
 
+        b0=dataModel2.getName();
+        b1=dataModel2.getValue();
+        b2=dataModel2.getAppInfo();
+        b3=dataModel2.getApp_id();
+        b4=dataModel2.getApp_type();
+
         chapterList = mSqLiteHandler.getAppList();
         DataModel m1 = new DataModel(a0, a1, a2, a3, a4);
-
+        DataModel m2 = new DataModel(b0, b1, b2, b3, b4);
         ArrayList<DataModel> model = new ArrayList<>();
         model.add(m1);
+        ArrayList<DataModel> m22=new ArrayList<>();
+        m22.add(m2);
+
         ArrayList<DataModel> headerOneList = new ArrayList<>();
         ArrayList<DataModel> headerTwoList = new ArrayList<>();
 
         for (DataModel model1 : model) {
-            if (a4.equals("1")) {
                 headerOneList.add(model1);
-                Log.d("DATATMODEL", "" + a4);
-            } else if (a4.equals("2")){
+                Log.d("DATATMODEL1", "" + headerOneList.size());
+        }
+        for (DataModel model1 : m22) {
                 headerTwoList.add(model1);
-                Log.d("DATATMODEL", "" + a4);
-            }
+                Log.d("DATATMODEL2", "" +  headerTwoList.size());
         }
 
         ArrayList<Object> headerList = new ArrayList<>();
-        headerList.add("header one");
+        headerList.add("Understanding Diseases");
         headerList.addAll(headerOneList);
-        headerList.add("header two");
+        headerList.add("Animated Pocket Dictionary");
         headerList.addAll(headerTwoList);
-        lvAppList.setAdapter(new ItemAdapter(getApplicationContext(), headerList));
-        //chapterList2=mSqLiteHandler.getUnd("2");
-        Log.d("@@@", "chapSize=" + chapterList.size());
+        appListAdapter=new ItemAdapter(getApplicationContext(),headerList);
+        lvAppList.setAdapter(appListAdapter);
+        appListAdapter.notifyDataSetChanged();
+        appList = mSqLiteHandler.getAppList();
 
 
-        //appListAdapter.addSectionHeaderItem("Understanding disease");
-        /*LayoutInflater mLayoutInflater=getLayoutInflater();
-        ViewGroup mViewGroup=(ViewGroup)mLayoutInflater.inflate(R.layout.list_group,lvAppList,false);
-        ViewGroup mViewGroup1=(ViewGroup)mLayoutInflater.inflate(R.layout.list_item,lvAppList,false);
-
-        lvAppList.addHeaderView(mViewGroup);
-        listdict.addHeaderView(mViewGroup1);*/
-
-        //lvAppList.setAdapter(appListAdapter);
-        /*else if (f0==2){
-           appListAdapter.addSectionHeaderItem("Understanding Dictionary");
-           lvAppList.setAdapter(appListAdapter);
-         }*/
-        /*chapterList=mSqLiteHandler.getUnd("2");
-        appListAdapter=new ItemAdapter(CollectionsActivity.this,chapterList);
-        lvAppList.setAdapter(appListAdapter);*/
-
-
+        Log.d("@@@", "appList=" + appList.size());
+        Log.d("@@@", "appList1=" + appList1.size());
         lvAppList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                dataModel = chapterList.get(position);
+                dataModel = appList.get(position);
+
                 String f1 = dataModel.getApp_type();
                 int v1 = Integer.parseInt(f1);
                 Log.d("TAGE", "++++++++" + f1);

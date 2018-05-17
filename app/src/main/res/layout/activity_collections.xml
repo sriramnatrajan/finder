@@ -10,16 +10,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.focusmedica.aqrshell.utils.Activities.CollectionsActivity">
 
-
         <ListView
             android:id="@+id/grid_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:columnWidth="@dimen/cardview_default_radius"
             android:numColumns="3"
             android:stretchMode="columnWidth"
             android:verticalSpacing="10dp" />
-
-</LinearLayout>
+    </LinearLayout>
