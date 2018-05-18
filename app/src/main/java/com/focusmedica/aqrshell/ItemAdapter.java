@@ -24,13 +24,24 @@ public class ItemAdapter extends BaseAdapter{
     String chapterImage1;
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
-   // ViewHolder viewHolder;
+   // MyViewHolder MyViewHolder;
     private LayoutInflater mInflater;
-
+    MyViewHolder MyViewHolder;
     public ItemAdapter(Context context, ArrayList<Object> listcontent ) {
         this.context = context;
         this.listcontent = listcontent;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+  class MyViewHolder  {
+
+          TextView chapter;
+          ImageView chapter_thumb;
+
+       /*   MyViewHolder(View view){
+            super(view);
+            chapter=(TextView)  view.findViewById(R.id.chapter_tv);
+            chapter_thumb=(ImageView)view.findViewById(R.id.chapter_thumb_iv);
+        }*/
     }
 
     @Override
@@ -59,20 +70,29 @@ public class ItemAdapter extends BaseAdapter{
         }
         return TYPE_SEPARATOR;
     }
+    @Override
+    public boolean hasStableIds() {
+        return true;
+    }
 
     @Override
     public boolean isEnabled(int position) {
         return (getItemViewType(position)== TYPE_ITEM);
     }
 
+
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
+
         int rowType = getItemViewType(position);
 
         if (view == null) {
             switch (rowType) {
                 case TYPE_ITEM:
                     view = mInflater.inflate(R.layout.content_layout, viewGroup, false);
+                    MyViewHolder = new ItemAdapter.MyViewHolder();
+                    MyViewHolder.chapter = (TextView) view.findViewById(R.id.chapter_tv);
+                    MyViewHolder.chapter_thumb=(ImageView)view.findViewById(R.id.chapter_thumb_iv);
                     break;
                 case TYPE_SEPARATOR:
                     view = mInflater.inflate(R.layout.list_group, viewGroup, false);
@@ -83,15 +103,14 @@ public class ItemAdapter extends BaseAdapter{
         switch (rowType){
             case TYPE_ITEM:
                 DataModel  content = (DataModel) getItem(position);
-                TextView chapter = (TextView) view.findViewById(R.id.chapter_tv);
-                ImageView chapter_thumb = (ImageView) view.findViewById(R.id.chapter_thumb_iv);
+
                 chapterName=content.getName();
                 chapterImage=content.getValue();
                 chapterImage1=content.getApp_id();
                 appfolder=content.getApp_id();
-                chapter.setText(chapterName);
+                MyViewHolder.chapter .setText(chapterName);
                 Log.d("TAGG+++",chapterName+","+chapterImage+","+chapterImage1);
-                Glide.with(context).load(chapterImage+"/"+appfolder+"_thumbnail"+".png").into( chapter_thumb);
+                Glide.with(context).load(chapterImage+"/"+appfolder+"_thumbnail"+".png").into( MyViewHolder.chapter_thumb);
                 break;
             case TYPE_SEPARATOR:
                 TextView mTextView=(TextView)view.findViewById(R.id.expand_title);

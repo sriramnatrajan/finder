@@ -10,8 +10,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.focusmedica.aqrshell.utils.Activities.CollectionsActivity">
 
-        <ListView
-            android:id="@+id/grid_view"
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+
+            android:id="@+id/rc_view"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_alignParentLeft="true"

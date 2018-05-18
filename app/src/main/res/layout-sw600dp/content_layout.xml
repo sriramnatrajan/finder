@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="210dp"
+    android:layout_height="160dp"
     xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/md_grey_100">
@@ -25,18 +24,18 @@
                 android:layout_marginLeft="10dp"
                 card_view:cardCornerRadius="15dp"
                 card_view:contentPadding="0dp"
-                android:layout_width="170dp"
-                android:layout_height="190dp"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
                 android:layout_margin="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true">
                 <ImageView
-                    android:scaleType="fitXY"
-                    android:id="@+id/chapter_thumb_iv"
-                    android:src="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                android:scaleType="fitXY"
+                android:id="@+id/chapter_thumb_iv"
+                android:src="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
             </android.support.v7.widget.CardView>
             <TextView
                 android:layout_gravity="center|center_vertical|center_horizontal"
@@ -47,11 +46,10 @@
                 android:textStyle="bold"
                 android:layout_below="@+id/img"
                 android:text="TextView"
-                android:textColor="@color/md_white_1000"
+                android:textColor="@color/md_grey_700"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/chapter_tv" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

@@ -266,6 +266,8 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
                 lengthOfFile = conection.getContentLength();
                 InputStream input = new BufferedInputStream(url.openStream());
                 OutputStream output = new FileOutputStream(getApplicationContext().getFilesDir()+"/"+ mName);
+                Log.d("sriram", "output filepath: "+getApplicationContext().getFilesDir()+"/"+ mName);
+
                 byte data[] = new byte[1024];
                 while ((count = input.read(data)) != -1 && !isCancelled()) {
                 if (isCancelled()) break;
@@ -296,7 +298,7 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
             }
 //            mAdapter.notifyDataSetChanged();
             if (!videoDetails.isEmpty()) {
-                if (new File("data/data/com.focusmedica.aqrshell/files/"+name).exists()) {
+                if (new File(getApplicationContext().getFilesDir()+"/"+ mName).exists()) {
                     if (iv_download.isClickable()) {
                     iv_download.setVisibility(View.INVISIBLE);
                     }

@@ -55,8 +55,7 @@ public class LogActivity extends Activity {
 
         inputPassword = (EditText) findViewById(R.id.password);
        btnLogin = (Button) findViewById(R.id.btnLogin);
-      /*btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
-       btnLinkToRegister.setVisibility(View.INVISIBLE);*/
+
         final ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
@@ -69,18 +68,19 @@ public class LogActivity extends Activity {
                 ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         imageView.setLayoutParams(layoutParams);
         actionBar.setCustomView(imageView);
-
+        db = new SQLiteHandler(getApplicationContext());
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         findViewById(R.id.collbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i=new Intent(getApplicationContext(),CollectionsActivity.class);
                 startActivity(i);
             }
         });
         // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+
 
         // Session manager
         session = new SessionManager(getApplicationContext());
@@ -169,17 +169,7 @@ public class LogActivity extends Activity {
 
                             try {
                                 JSONObject jObj = new JSONObject(result);
-                                // boolean error = jObj.getBoolean("error");
 
-                                // Check for error node in json
-                                // if (!error) {
-                                // user successfully logged in
-                                //    session.setLogin(true);
-
-                                // Now store the user in SQLite
-                                //  String uid = jObj.getString("uid");
-
-                                // JSONObject user = jObj.getJSONObject("res");
                                 String name = jObj.getString("name");
                                 String value = jObj.getString("value");
                                 String appid = jObj.getString("app_folder");
@@ -189,9 +179,6 @@ public class LogActivity extends Activity {
                                 int a00=Integer.parseInt(apptype);
 
                                 db.addUser(name,value,appid,appInfo,apptype);
-
-
-
 
                                 // Launch main activity
                                 Intent intent = new Intent(LogActivity.this,
@@ -207,10 +194,7 @@ public class LogActivity extends Activity {
                                 Toast.makeText(getApplicationContext(), "Incorrect code", Toast.LENGTH_LONG).show();
                                 //Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                             }
-
-                      } else {
-
-                        }
+                      }
                     }
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
@@ -297,95 +281,3 @@ public class LogActivity extends Activity {
         return haveConnectedWifi || haveConnectedMobile;
     }
 }
-    /**
-     * function to verify login details in mysql db
-     * */
-
-    /*
- private void response(String name,String value,String appid,String appInfo ) {
-        // Tag used to cancel the request
-        String tag_string_req = "req_login";
-
-        pDialog.setMessage("Logging in ...");
-        showDialog();
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_REGISTER, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
-                hideDialog();
-
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-
-                    // Check for error node in json
-                    if (!error) {
-                        // user successfully logged in
-                        // Create login session
-                        session.setLogin(true);
-
-                        // Now store the user in SQLite
-                        String uid = jObj.getString("uid");
-
-                       // JSONObject user = jObj.getJSONObject("res");
-                          String name = jObj.getString("name");
-                        String value = jObj.getString("value");
-                        String appid = jObj.getString("app_id");
-                        String appInfo=jObj.getString("app_info");
-
-                            db.addUser(name,value,appid,appInfo);
-                        // Launch main activity
-                        Intent intent = new Intent(LogActivity.this,
-                                CollectionsActivity.class);
-                        Toast.makeText(LogActivity.this, "value==="+name+value+appid+appInfo, Toast.LENGTH_SHORT).show();
-                        intent.putExtra("name",name);
-                        startActivity(intent);
-                        finish();
-                        hideDialog();
-                    } else {
-                        hideDialog();
-                        // Error in login. Get the error message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-            }
-        },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Login Error: " + error.getMessage());
-                        Toast.makeText(getApplicationContext(),
-                                error.getMessage(), Toast.LENGTH_LONG).show();
-                        hideDialog();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("username", email);
-                params.put("password", password);
-               // params.put("titleId",titleId);
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        ApplicationController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
-*/
-
-
