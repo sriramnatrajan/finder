@@ -29,13 +29,14 @@ public class Info extends Activity {
     ArrayList<DIctionaryContent> AppDetails=new ArrayList<>();
 
     String thumb;
+    String imageInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         Intent i=getIntent();
         thumb=i.getStringExtra("thumbinfo");
-
+        imageInfo=i.getStringExtra("imageInfo");
 
         if(getResources().getBoolean(R.bool.portrait_only)){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -57,19 +58,13 @@ public class Info extends Activity {
         info= (ImageView) mCustomView.findViewById(R.id.imageView4);
         ImageView  iv_download=(ImageView)mCustomView. findViewById(R.id.iv_download);
         iv_download.setVisibility(View.INVISIBLE);
-        Glide.with(Info.this).load(thumb+"_thumbnail.png").into(thumbnailimageview);
-        Log.d("Thumbnail",thumb+"_thumbnail.png");
-        // buy= (ImageView) mCustomView.findViewById(R.id.imageView3);
+        Glide.with(Info.this).load(imageInfo).into(thumbnailimageview);
+        Log.d("Thumbnail",imageInfo+"_thumbnail.png");
         info.setVisibility(View.INVISIBLE);
-      //  buy.setVisibility(View.INVISIBLE);
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
 
-        handler=new Mydatabase(getApplicationContext(), "");
-        AppDetails=handler.getAppDetail();
-        content=AppDetails.get(0);
-
-        tvInfo.setText(content.getInfo());
+        tvInfo.setText(thumb);
 
         Button feedTextView = (Button) findViewById(R.id.button);
         feedTextView.setText(R.string.text_feedback);

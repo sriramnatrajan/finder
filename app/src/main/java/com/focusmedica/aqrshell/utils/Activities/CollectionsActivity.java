@@ -9,9 +9,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import com.focusmedica.aqrshell.R;
 import com.focusmedica.aqrshell.dbHandler.SQLiteHandler;
 import com.focusmedica.aqrshell.dictionary.Firstpage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class CollectionsActivity extends Activity {
@@ -42,7 +44,7 @@ public class CollectionsActivity extends Activity {
     ArrayList<DataModel> chapterList, chapterList2;
     ArrayList<DataModel> appList,appList1,appList3;
     ArrayList<DataModel> appDetails;
-    int ik;
+    int ik;  View mCustomView;
     DataModel dataModel, dataModel2;
     AppListHandler appListHandler;
     SQLiteHandler mSqLiteHandler;
@@ -55,22 +57,18 @@ public class CollectionsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collections);
         lvAppList = (SwipeMenuListView) findViewById(R.id.rc_view);
-
-        final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayOptions(actionBar.getDisplayOptions() | ActionBar.DISPLAY_SHOW_CUSTOM);
-        ImageView imageView = new ImageView(actionBar.getThemedContext());
-        imageView.setScaleType(ImageView.ScaleType.CENTER);
-        imageView.setImageResource(R.drawable.fmlogo);
-        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(
-        ActionBar.LayoutParams.WRAP_CONTENT,
-        ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        imageView.setLayoutParams(layoutParams);
-        actionBar.setCustomView(imageView);
-
+        ActionBar mActionBar = getActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        ImageView info=(ImageView)mCustomView.findViewById(R.id.imageView4);
+       info.setVisibility(View.INVISIBLE);
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);
+        ImageView i=(ImageView)mCustomView.findViewById(R.id.iv_download) ;
+        i.setVisibility(View.INVISIBLE);
         appListHandler = new AppListHandler(this);
-        chapterList = new ArrayList<>();
         appList = new ArrayList<>();
         appDetails = new ArrayList<>();
         mSqLiteHandler = new SQLiteHandler(this);
@@ -91,12 +89,17 @@ public class CollectionsActivity extends Activity {
             Log.d("@@@@@@@@@@@@@", a0 + a1 + a2 + a3 + a4 );
             appListHandler.addAppList(dataModel);
         }
-        appList = mSqLiteHandler.getUnd("1");
-        appList1=mSqLiteHandler.getUnd("2");
-        Log.d("@@@", "size=" + appList.size());
-        Log.d("@@@", "appList1=" + appList1.size());
-        dataModel = appList.get(0);
-        dataModel2 = appList1.get(0);
+        try{
+            appList = mSqLiteHandler.getUnd("1");
+            appList1=mSqLiteHandler.getUnd("2");
+            Log.d("@@@", "size=" + appList.size());
+            Log.d("@@@", "appList1=" + appList1.size());
+            dataModel = appList.get(0);
+            dataModel2 = appList1.get(0);
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+
 
         final ArrayList<Object> headerList = new ArrayList<>();
         headerList.add("Understanding Diseases");
@@ -106,6 +109,9 @@ public class CollectionsActivity extends Activity {
         appListAdapter=new ItemAdapter(getApplicationContext(),headerList);
 
         lvAppList.setAdapter(appListAdapter);
+        final ArrayList<Object> headerList1 = new ArrayList<>();
+        headerList1.addAll(appList);
+        headerList1.addAll(appList1);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -126,6 +132,12 @@ public class CollectionsActivity extends Activity {
 
             }
         };
+        if (creator.equals(headerList.contains("Understanding Diseases"))){
+            lvAppList.setSwipeDirection(0);
+        }if (creator.equals(headerList.contains("Animated Pocket Dictionary"))){
+            lvAppList.setSwipeDirection(0);
+        }
+        lvAppList.setCloseInterpolator(new BounceInterpolator());
         lvAppList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view,   int position , long id) {
@@ -151,23 +163,39 @@ public class CollectionsActivity extends Activity {
         });
 
         lvAppList.setMenuCreator(creator);
+
         lvAppList.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
 
-                        dataModel = (DataModel) headerList.get(position );
-                        Toast.makeText(CollectionsActivity.this, "File Deleted"+position , Toast.LENGTH_SHORT).show();
-                        headerList.remove(position);
-                        appListAdapter.notifyDataSetChanged();
-                Log.d("Position of List", ""+position );
-                // false : close the menu; true : not close the menu
+            dataModel = (DataModel) headerList.get(position);
+                Toast.makeText(CollectionsActivity.this, "File Deleted" + position + dataModel.getName(), Toast.LENGTH_SHORT).show();
+                Log.d("TAG", "File Closed" + dataModel);
+                Log.d("TAG", "Index====" +  index);
+                headerList.remove(dataModel);
+                mSqLiteHandler.getDetails(dataModel.getName());
+                mSqLiteHandler.removeSingleContent(dataModel.getName());
+                appListAdapter.notifyDataSetChanged();
+                lvAppList.setAdapter(appListAdapter);
+                String tn0=dataModel.getName();
+                File mFile=new File(getApplicationContext().getFilesDir()+"/"+tn0+"/"+"video.mp4");
+                if (mFile.exists()){
+                    mFile.delete();
+                }
                 return false;
             }
         });
+
+        lvAppList.setOpenInterpolator(new BounceInterpolator());
+
         lvAppList.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
-
-        // Left
         lvAppList.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(getApplicationContext(),LogActivity.class);
+        startActivity(i);
     }
 }

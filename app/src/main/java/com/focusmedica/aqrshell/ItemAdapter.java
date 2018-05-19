@@ -110,7 +110,7 @@ public class ItemAdapter extends BaseAdapter{
                 appfolder=content.getApp_id();
                 MyViewHolder.chapter .setText(chapterName);
                 Log.d("TAGG+++",chapterName+","+chapterImage+","+chapterImage1);
-                Glide.with(context).load(chapterImage+"/"+appfolder+"_thumbnail"+".png").into( MyViewHolder.chapter_thumb);
+                Glide.with(context).load(chapterImage+"/"+appfolder+"_thumbnail.png").into( MyViewHolder.chapter_thumb);
                 break;
             case TYPE_SEPARATOR:
                 TextView mTextView=(TextView)view.findViewById(R.id.expand_title);

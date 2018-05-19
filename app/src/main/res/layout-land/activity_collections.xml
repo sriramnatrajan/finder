@@ -13,13 +13,13 @@
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
 
-            android:id="@+id/rc_view"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:columnWidth="@dimen/cardview_default_radius"
-            android:numColumns="3"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="10dp" />
-    </LinearLayout>
+        android:id="@+id/rc_view"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:columnWidth="@dimen/cardview_default_radius"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" />
+</LinearLayout>

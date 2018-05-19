@@ -146,16 +146,19 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 		}
 		return imageList;
 	}
-	public ArrayList<DataModel> getUnd(String apptype ) {
+	public void removeSingleContent(String title) {
+		//Open the database
+		SQLiteDatabase database = this.getWritableDatabase();
+		database.execSQL("DELETE FROM   user   WHERE name  = '" + title + "'");
+		database.close();
+	}
 
+	public ArrayList<DataModel> getUnd(String apptype ) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<DataModel> imageList = null;
 		try {
 			imageList = new ArrayList<DataModel>();
 			String QUERY = "SELECT name,value,app_id,appInfo,app_type FROM user where app_type='" + apptype+ "' ";
-
-			//String QUERY = "SELECT  * FROM " + TABLE_USER;
-			//memberName name changes
 			Cursor mCursor = db.rawQuery(QUERY, null);
 
 			if (!mCursor.isLast()) {
@@ -166,7 +169,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 					images.setApp_id(mCursor.getString(2));
 					images.setAppInfo(mCursor.getString(3));
 					images.setApp_type(mCursor.getString(4));
-					//images.setAppFolder(mCursor.getString(5));
 					imageList.add(images);
 				}
 			}
@@ -174,12 +176,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 		} catch (Exception e) {
 			Log.e("TITLE NAME", e + "" + e.getMessage());
 		}
-
 		return imageList;
 	}
-	/**
-	 * Re crate database Delete all tables and create them again
-	 * */
+
+
 	public void deleteUsers() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		// Delete All Rows

@@ -17,7 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.focusmedica.aqrshell.dbHandler.SQLiteHandler;
+import com.focusmedica.aqrshell.dictionary.Info;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -50,29 +51,25 @@ String url, titleName;
     double screenInches;
     android.widget.ProgressBar spinner;   DataModel dataModel;
     String a0,a1,a2,a3;RelativeLayout mRelativeLayout;
-
+    View mCustomView;  ImageView info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview);
 
-       // spinner = ( android.widget.ProgressBar) findViewById(R.id.progressBar1);
-        //spinner.setVisibility(View.VISIBLE);
         mRelativeLayout=(RelativeLayout)findViewById(R.id.bg);
         thumbDownload=(ImageView)findViewById(R.id.thumbdownload);
         transcript=(ImageView)findViewById(R.id.transcriptbtn);
-        final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayOptions(actionBar.getDisplayOptions() | ActionBar.DISPLAY_SHOW_CUSTOM);
-        ImageView imageView = new ImageView(actionBar.getThemedContext());
-        imageView.setScaleType(ImageView.ScaleType.CENTER);
-        imageView.setImageResource(R.drawable.fmlogo);
-        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        imageView.setLayoutParams(layoutParams);
-        actionBar.setCustomView(imageView);
+        ActionBar mActionBar = getActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        info=(ImageView)mCustomView.findViewById(R.id.imageView4);
+        ImageView i=(ImageView)mCustomView.findViewById(R.id.iv_download) ;
+        i.setVisibility(View.INVISIBLE);
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         double x = Math.pow(dm.widthPixels/dm.xdpi,2);
@@ -91,8 +88,16 @@ String url, titleName;
             a1=dataModel.getValue();
             a2=dataModel.getAppInfo();
             a3=dataModel.getApp_id();
-
         }
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getApplicationContext(), Info.class);
+                i .putExtra("thumbinfo",a2);
+                i.putExtra("app Image",a1+a3+"_thumbnail.png");
+                startActivity(i);
+            }
+        });
 
      tn0=titleName.toLowerCase();
         if (screenInches<=5.571247911145661){

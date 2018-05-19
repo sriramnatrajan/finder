@@ -81,7 +81,6 @@ public class LogActivity extends Activity {
         });
         // SQLite database handler
 
-
         // Session manager
         session = new SessionManager(getApplicationContext());
 
@@ -113,7 +112,6 @@ public class LogActivity extends Activity {
                         pDialog1.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         pDialog1.setCancelable(false);
                         pDialog1.show();
-
                     }
 
                 } else {
@@ -214,6 +212,9 @@ public class LogActivity extends Activity {
             e.printStackTrace();
             Toast.makeText(LogActivity.this, "code is incorrect", Toast.LENGTH_SHORT).show();
 
+        }catch (Exception e){
+            pDialog.dismiss();
+            Toast.makeText(LogActivity.this, "Try Again", Toast.LENGTH_SHORT).show();
         }
     }
 

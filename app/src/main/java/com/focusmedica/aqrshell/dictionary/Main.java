@@ -55,7 +55,6 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
      String name;
     View mCustomView;
     Content mContent;
-
     ListView Lview;
     Content.ListAdapter adapter;
     DIctionaryContent content;
@@ -63,14 +62,13 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
     Mydatabase mdatabase;
     List listcontent;
     Content.DownloadFileFromURL asyncobj ;
-    String vdoname,firstchar;
+    String vdoname ;
     ProgressDialog pDialog;
     int img_position,flag=0;
-    //Boolean ispremium=true;
     View mView;  String videofileName;
     String linkStr;
     ImageView iv_download;
-    ListAdapter mAdapter;
+
 
 
     @Override
@@ -84,7 +82,6 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
     }
         Intent i=getIntent();
           thumb=i.getStringExtra("thumbinfo");
-
         ActionBar mActionBar = getActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
@@ -111,7 +108,7 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
         });
      onArticleSelected("A");
 
-/* iv_download.setOnClickListener(new View.OnClickListener() {
+/*iv_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
               //TextView tv=(TextView)findViewById(R.id.textView3);
