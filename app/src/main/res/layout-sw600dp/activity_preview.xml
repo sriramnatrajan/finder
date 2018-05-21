@@ -5,13 +5,13 @@
     android:id="@+id/bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:adjustViewBounds="true"
+    android:layout_margin="5dp"
+    android:scaleType="fitXY"
     android:background="@drawable/backlayout"
     tools:context="com.focusmedica.aqrshell.PreviewActivity">
 
-
-
-        <RelativeLayout
+            <RelativeLayout
             android:id="@+id/te"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -36,7 +36,4 @@
                 android:layout_toRightOf="@+id/thumbdownload"
                 android:src="@drawable/transcript_pressed" />
         </RelativeLayout>
-
-
-
 </RelativeLayout>

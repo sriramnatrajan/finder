@@ -1,4 +1,4 @@
-package com.focusmedica.aqrshell.dictionary;
+package com.focusmedica.aqrshell;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -14,17 +14,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
-import com.focusmedica.aqrshell.R;
+import com.focusmedica.aqrshell.dictionary.DIctionaryContent;
+
 import java.util.ArrayList;
 
-public class Info extends Activity {
+public class InfoActivity extends Activity {
     ImageView info,fb,twitter,focusweb,linkedin,thumbnailimageview;
     TextView tvInfo;
     private static StringBuilder appVersion;
     DIctionaryContent content;
     ArrayList<DIctionaryContent> AppDetails=new ArrayList<>();
-    String appName;
+    String appName,b1;
     String thumb;
     String imageInfo;
     @Override
@@ -32,9 +34,9 @@ public class Info extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         Intent i=getIntent();
-        appName=i.getStringExtra("APP NAME");
-        thumb=i.getStringExtra("thumbinfo");
-        imageInfo=i.getStringExtra("app Image");
+        thumb=i.getStringExtra("Thumbnail");
+        b1=i.getStringExtra("b1");
+     //   imageInfo=i.getStringExtra("app Image");
 
         if(getResources().getBoolean(R.bool.portrait_only)){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -56,7 +58,7 @@ public class Info extends Activity {
         info= (ImageView) mCustomView.findViewById(R.id.imageView4);
         ImageView  iv_download=(ImageView)mCustomView. findViewById(R.id.iv_download);
         iv_download.setVisibility(View.INVISIBLE);
-        Glide.with(Info.this).load(imageInfo).into(thumbnailimageview);
+        Glide.with(InfoActivity.this).load(thumb).into(thumbnailimageview);
         Log.d("Thumbnail",imageInfo+"_thumbnail.png");
         info.setVisibility(View.INVISIBLE);
         mActionBar.setCustomView(mCustomView);
@@ -121,7 +123,7 @@ public class Info extends Activity {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.text_feedback_mail_id)});
-        intent.putExtra(Intent.EXTRA_SUBJECT, ("Feedback : " + getString(R.string.app_name)+ " "+appName + " (Google Play)"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, ("Feedback : " + getString(R.string.app_name)+ " "+b1 + " (Google Play)"));
         intent.putExtra(Intent.EXTRA_TEXT, ("App Version : " + appVersion.toString() + "\nDevice : " + deviceInfo.toString() + "\nAndroid : " + osVersion.toString() + "\n<Insert feedback below>\n\n"));
         startActivity(Intent.createChooser(intent, "Feedback"));
     }

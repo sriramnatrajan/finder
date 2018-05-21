@@ -153,9 +153,9 @@ public class CollectionsActivity extends Activity {
                     startActivity(i);
                 } else {
                     Intent i = new Intent(getApplicationContext(), Firstpage.class);
+                    i.putExtra("titleName", dataModel.getName());
                     i.putExtra("app_id", dataModel.getApp_id());
                     i.putExtra("url", dataModel.getValue());
-                    Log.d("APPPP_ID+++++++++++++++", dataModel.getApp_id());
                     startActivity(i);
 
                 }

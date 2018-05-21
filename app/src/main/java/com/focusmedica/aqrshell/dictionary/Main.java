@@ -24,7 +24,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.focusmedica.aqrshell.DataModel;
+import com.focusmedica.aqrshell.InfoActivity;
 import com.focusmedica.aqrshell.R;
+import com.focusmedica.aqrshell.dbHandler.SQLiteHandler;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -66,11 +69,11 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
     ProgressDialog pDialog;
     int img_position,flag=0;
     View mView;  String videofileName;
-    String linkStr;
+    String linkStr,titleName;
     ImageView iv_download;
-
-
-
+    DataModel dataModel;
+    SQLiteHandler mSqLiteHandler;
+     String a0,a1,a2,a3; String thumbnail,b1_titleName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -82,6 +85,9 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
     }
         Intent i=getIntent();
           thumb=i.getStringExtra("thumbinfo");
+        thumbnail=i.getStringExtra("Thumbnail");
+        b1_titleName=i.getStringExtra("b1_titleName");
+        Log.d("Thumbnail",thumbnail);
         ActionBar mActionBar = getActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
@@ -101,30 +107,15 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
         info.setOnClickListener(new View.OnClickListener() {
          @Override
         public void onClick(View view) {
-          Intent in = new Intent(getApplicationContext(), Info.class);
-          in.putExtra("thumbinfo",thumb);
+          Intent in = new Intent(getApplicationContext(), InfoActivity.class);
+          in.putExtra("Thumbnail",thumbnail);
+          in.putExtra("b1",b1_titleName);
           startActivity(in);
             }
         });
      onArticleSelected("A");
 
-/*iv_download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              //TextView tv=(TextView)findViewById(R.id.textView3);
-              //getVideoFileName
 
-                videoDetails=handler.getVideoFileName("A");
-                content=videoDetails.get(0);
-                vdoname =content.getVDOname();
-
-                filterVideoName=vdoname.replaceAll(" ","");
-                String  s=handler.getVideoFileName("A").toString();
-                new DownloadFileFromURL(url+filterVideoName,  filterVideoName).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                Log.d("File",url+filterVideoName );
-            }
-        });
-*/
     }
 
     @Override
@@ -158,7 +149,6 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
          }
      }catch (IndexOutOfBoundsException e){
          e.printStackTrace();
-        //Log.d("Call","https://www.google.co.in/search?q="+e);
          handler.close();
      }
 
@@ -173,7 +163,6 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
                         name = name.replaceAll(" ", "%20");
                         Log.d("File: ", url + name);
                         new DownloadFileFromURL(url + name, name).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
                     }
                 }
                 handler.close();
@@ -303,12 +292,7 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
                 }
             }
             handler.close();
-
-         /*while (pDialog.isShowing()){
-                 pDialog.cancel();
-             }*/
              if (!isCancelled()) {
-              //   if (pDialog.isShowing())pDialog.dismiss();
             } else {
                 onDownloadCancelled();
             }
@@ -330,7 +314,7 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
-    public class ListAdapter extends BaseAdapter implements View.OnClickListener{
+         public class ListAdapter extends BaseAdapter implements View.OnClickListener{
         Context context;
 
         public ListAdapter(Context context,String firstchar){
@@ -396,39 +380,7 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
             viewHolder.img.setId(position);
             String lower_case=content.getVDOname().toLowerCase().substring(0, content.getVDOname().indexOf(".")).replaceAll(" ", "").replaceAll("-","");
 
-        /*    if(ispremium==true) {
-                if (content.getAlphaflsg().equals("A")) {
-                    if(position<10) {
-                        if (new File("data/data/com.focusmedica.aqrshell/files/" + content.getVDOname()).exists()) {
-                            viewHolder.img.setImageResource(R.drawable.play_pressed);
-                            viewHolder.title.setTextColor(Color.parseColor("#ffffff"));
-                            viewHolder.content.setTextColor(Color.parseColor("#ffffff"));
 
-                        }else if (getActivity().getResources().getIdentifier(lower_case,
-                                "raw", getActivity().getPackageName()) != 0) {
-                            viewHolder.img.setImageResource(R.drawable.play_pressed);
-                            viewHolder.title.setTextColor(Color.parseColor("#ffffff"));
-                            viewHolder.content.setTextColor(Color.parseColor("#ffffff"));
-                        } else {
-
-                            viewHolder.img.setImageResource(R.drawable.download_enable);
-                            viewHolder.title.setTextColor(Color.parseColor("#ffffff"));
-                            viewHolder.content.setTextColor(Color.parseColor("#ffffff"));
-
-                        }
-                    }
-                    else {
-                        viewHolder.img.setImageResource(R.drawable.download_disable);
-                        viewHolder.title.setTextColor(Color.parseColor("#808080"));
-                        viewHolder.content.setTextColor(Color.parseColor("#808080"));
-                    }
-
-                }  else {
-                    viewHolder.img.setImageResource(R.drawable.download_disable);
-                    viewHolder.title.setTextColor(Color.parseColor("#808080"));
-                    viewHolder.content.setTextColor(Color.parseColor("#808080"));
-                }
-            }else{*/
             if (new File("data/data/com.focusmedica.aqrshell/files/" + content.getVDOname()).exists()) {
                 iv_download.setVisibility(View.INVISIBLE);
                 viewHolder.img.setImageResource(R.drawable.play_pressed);
@@ -448,8 +400,6 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
                 viewHolder.title.setTextColor(Color.parseColor("#ffffff"));
                 viewHolder.content.setTextColor(Color.parseColor("#ffffff"));
             }
-
-
 
             viewHolder.img.setOnClickListener(new View.OnClickListener() {
 

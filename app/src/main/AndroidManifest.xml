@@ -20,7 +20,8 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".utils.Activities.LogActivity">
+        <activity android:name=".utils.Activities.LogActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,7 +57,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".dictionary.Main" />
         <activity android:name=".dictionary.VideoPlay2Activity" />
-
+<activity android:name=".InfoActivity"/>
     </application>
 
 </manifest>

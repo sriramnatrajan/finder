@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backlayout"
@@ -10,22 +8,40 @@
     android:padding="10dp">
 
     <LinearLayout
-        android:layout_marginTop="150dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:layout_weight="0.07"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:weightSum="1"
-        android:layout_weight="0.07">
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/fmlogo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Focus Medica"
+            android:textAlignment="center"
+            android:textColor="@color/md_red_500"
+            android:textSize="27dp"
+            android:textStyle="bold" />
 
         <EditText
-            android:background="@color/white"
             android:id="@+id/coupon_id"
-            android:layout_width="fill_parent"
-            android:layout_height="62dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="120dp"
+            android:background="@color/white"
             android:hint="Title Code"
             android:inputType="text"
             android:padding="10dp"
@@ -33,64 +49,50 @@
             android:textColor="@color/md_grey_600"
             android:textColorHint="@color/md_grey_600" />
 
-        <!--  <EditText
-              android:id="@+id/email"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="10dp"
-              android:background="@color/white"
-              android:hint="@string/hint_email"
-              android:inputType="textEmailAddress"
-              android:padding="10dp"
-              android:singleLine="true"
-              android:textColor="@color/md_grey_600"
-              android:textColorHint="@color/md_grey_600"
-              android:layout_weight="0.04" />
-  -->
+
         <EditText
             android:id="@+id/password"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="120dp"
+            android:layout_weight="0.04"
             android:background="@color/white"
             android:hint="@string/hint_password"
             android:padding="10dp"
             android:singleLine="true"
-            android:layout_weight="0.04"
             android:textColor="@color/md_grey_600"
-            android:textColorHint="@color/md_grey_600"/>
+            android:textColorHint="@color/md_grey_600" />
 
         <!-- Login Button -->
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="120dp"
             android:layout_marginTop="20dip"
-            android:background="@color/md_pink_500"
+            android:background="@color/md_yellow_700"
+            android:elevation="10dp"
             android:text="@string/btn_login"
-            android:textColor="@color/white" />
+            android:textColor="@color/md_black_1000" />
 
-        <!-- Link to Login Screen -->
-
-       <!-- <Button
-            android:layout_width="fill_parent"
-            android:id="@+id/btnLinkToRegisterScreen"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:background="@null"
-            android:text="@string/btn_link_to_register"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15dp"/>-->
         <Button
             android:id="@+id/collbtn"
-            android:textColor="@color/white"
-            android:background="@color/md_pink_500"
-            android:text="Collections"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="120dp"
             android:layout_marginTop="15dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:background="@color/md_yellow_700"
+            android:elevation="10dp"
+            android:text="Collections"
+            android:textColor="@color/md_black_1000" />
     </LinearLayout>
 
 

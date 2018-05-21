@@ -31,6 +31,7 @@ public class Firstpage extends Activity {
     private static File videoFile;
     ImageView ivLoading,brandPage;
   double screenInches;
+  String b1,b2,b3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,10 @@ public class Firstpage extends Activity {
         urlValue=i.getStringExtra("url");
 
         url=urlValue+"/"+a3+"_db.dll";
+        b1=i.getStringExtra("titleName");
+        b2=i.getStringExtra("app_id");
+        b3=i.getStringExtra("url");
+        Log.d("URL Values",b3+"  "+b2);
 
         RelativeLayout relate=(RelativeLayout)findViewById(R.id.apppic);
          brandPage=(ImageView)findViewById(R.id.brandPage);
@@ -83,6 +88,8 @@ public class Firstpage extends Activity {
                 if (file.exists()) {
                     Intent intent = new Intent(getApplicationContext(), Main.class);
                     intent.putExtra("thumbinfo",urlValue+"/"+a3);
+                    intent.putExtra("b1_titleName",b1);
+                    intent.putExtra("Thumbnail",b3+"/"+b2+"_thumbnail.png");
                     startActivity(intent);
                 }else{
                     if (!haveNetworkConnection()) {

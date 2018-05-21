@@ -41,7 +41,7 @@ import java.util.ArrayList;
 public class PreviewActivity extends Activity {
 String url, titleName;
     ImageView transcript;
-    ImageView thumbnailImage,thumbDownload,thumbplay;
+    ImageView thumbDownload,thumbplay;
     private ProgressDialog pDialog;
     int flag=0; ArrayList<DataModel> appList;
     File mFile;
@@ -94,7 +94,9 @@ String url, titleName;
             public void onClick(View v) {
                 Intent i=new Intent(getApplicationContext(), Info.class);
                 i .putExtra("thumbinfo",a2);
-                i.putExtra("app Image",a1+a3+"_thumbnail.png");
+                i.putExtra("app Image",a1+"/"+a3+"_thumbnail.png");
+                i.putExtra("APP NAME",a0);
+                Log.d("TAG THUMBNAIL",a1+a3);
                 startActivity(i);
             }
         });
@@ -114,7 +116,7 @@ String url, titleName;
             //spinner.setVisibility(View.GONE);
 
         }else {
-            Glide.with(this).load(a1+"/tab_brand.png").asBitmap().into(new SimpleTarget<Bitmap>(200, 200) {
+            Glide.with(this).load(a1+"/phone_brand.png").asBitmap().into(new SimpleTarget<Bitmap>(200, 200) {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 Drawable drawable = new BitmapDrawable(getApplicationContext().getResources(), resource);

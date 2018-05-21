@@ -1,6 +1,5 @@
 package com.focusmedica.aqrshell.utils.Activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,12 +8,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.focusmedica.aqrshell.ApiCaller;
@@ -56,7 +53,7 @@ public class LogActivity extends Activity {
         inputPassword = (EditText) findViewById(R.id.password);
        btnLogin = (Button) findViewById(R.id.btnLogin);
 
-        final ActionBar actionBar = getActionBar();
+       /* final ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayOptions(actionBar.getDisplayOptions() | ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -67,7 +64,8 @@ public class LogActivity extends Activity {
                 ActionBar.LayoutParams.WRAP_CONTENT,
                 ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         imageView.setLayoutParams(layoutParams);
-        actionBar.setCustomView(imageView);
+        actionBar.setCustomView(imageView);*/
+
         db = new SQLiteHandler(getApplicationContext());
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
