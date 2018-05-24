@@ -5,7 +5,6 @@
     android:id="@+id/bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@drawable/backlayout"
     tools:context="com.focusmedica.aqrshell.PreviewActivity">
 
@@ -24,7 +23,7 @@
                 android:layout_marginLeft="50dp"
                 android:id="@+id/thumbdownload"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ud_download_pressed" />
 
@@ -32,7 +31,7 @@
                 android:layout_marginLeft="50dp"
                 android:id="@+id/transcriptbtn"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="10dp"
@@ -41,5 +40,4 @@
                 android:src="@drawable/transcript_pressed" />
         </RelativeLayout>
     </RelativeLayout>
-
 </RelativeLayout>

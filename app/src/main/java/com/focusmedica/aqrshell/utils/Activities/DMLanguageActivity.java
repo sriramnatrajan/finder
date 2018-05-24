@@ -14,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -72,7 +71,6 @@ public class DMLanguageActivity extends Activity implements CancelListener{
     static ImageView ivDownload;
     int position;
     public static final int progress_bar_type = 0;
-    Toolbar toolbar;
     private ProgressDialog pDialog1;
     DownloadDialog pDialog;
     private static File videoFile;
@@ -573,7 +571,6 @@ public class DMLanguageActivity extends Activity implements CancelListener{
                 createDir(outputFile.getParentFile());
             }
 
-            // Log.v("", "Extracting: " + entry);
             BufferedInputStream inputStream = new BufferedInputStream(zipfile.getInputStream(entry));
             BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));
 

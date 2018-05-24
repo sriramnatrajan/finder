@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backlayout"
@@ -8,40 +10,36 @@
     android:padding="10dp">
 
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
-        android:layout_weight="0.07"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:weightSum="1">
-
+        android:weightSum="1"
+        android:layout_weight="0.07">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_marginBottom="70dp"
             android:layout_gravity="center"
-            android:background="@drawable/fmlogo" />
-
+            android:background="@drawable/fmlogo"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Focus Medica"
+            android:textSize="29dp"
             android:textAlignment="center"
-            android:textColor="@color/md_red_500"
-            android:textSize="27dp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            android:textColor="@color/md_red_500"/>
         <EditText
-            android:id="@+id/coupon_id"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"
             android:background="@color/white"
+            android:id="@+id/coupon_id"
+            android:layout_width="400dp"
+            android:layout_height="62dp"
+            android:layout_marginBottom="10dp"
             android:hint="Title Code"
             android:inputType="text"
             android:padding="10dp"
@@ -51,48 +49,42 @@
 
 
         <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
             android:layout_gravity="center"
+            android:id="@+id/password"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"
-            android:layout_weight="0.04"
             android:background="@color/white"
             android:hint="@string/hint_password"
             android:padding="10dp"
             android:singleLine="true"
+            android:layout_weight="0.04"
             android:textColor="@color/md_grey_600"
-            android:textColorHint="@color/md_grey_600" />
+            android:textColorHint="@color/md_grey_600"/>
 
         <!-- Login Button -->
 
         <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:elevation="10dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"
+            android:id="@+id/btnLogin"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@color/md_yellow_700"
-            android:elevation="10dp"
             android:text="@string/btn_login"
             android:textColor="@color/md_black_1000" />
 
         <Button
-            android:id="@+id/collbtn"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"
-            android:layout_marginTop="15dp"
-            android:background="@color/md_yellow_700"
             android:elevation="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/collbtn"
+            android:textColor="@color/md_black_1000"
+            android:background="@color/md_yellow_700"
             android:text="Collections"
-            android:textColor="@color/md_black_1000" />
+            android:layout_marginTop="15dp"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 

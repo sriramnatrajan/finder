@@ -15,6 +15,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,11 +24,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.focusmedica.aqrshell.dbHandler.SQLiteHandler;
 import com.focusmedica.aqrshell.dictionary.Info;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -103,7 +103,30 @@ String url, titleName;
 
      tn0=titleName.toLowerCase();
         if (screenInches<=5.571247911145661){
-            Glide.with(this).load(a1+"/phone_brand.png").asBitmap().into(new SimpleTarget<Bitmap>(100, 100) {
+            final Handler h=new Handler();
+            h.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Picasso.with(getApplicationContext()).load(a1+"/phone_brand.png").into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            mRelativeLayout.setBackground(new BitmapDrawable(bitmap));
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+                            Toast.makeText(PreviewActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
+
+                    });
+                }
+            },1000);
+          /*  Glide.with(this).load(a1+"/phone_brand.png").asBitmap().into(new SimpleTarget<Bitmap>(100, 100) {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                     Drawable drawable = new BitmapDrawable(getApplicationContext().getResources(), resource);
@@ -112,11 +135,35 @@ String url, titleName;
                     }
                 }
             });
-            Log.d("TAGURL",a1+"/phone_brand.png");
+            Log.d("TAGURL",a1+"/phone_brand.png");*/
             //spinner.setVisibility(View.GONE);
 
         }else {
-            Glide.with(this).load(a1+"/phone_brand.png").asBitmap().into(new SimpleTarget<Bitmap>(200, 200) {
+           final Handler h=new Handler();
+           h.postDelayed(new Runnable() {
+               @Override
+               public void run() {
+                   Picasso.with(PreviewActivity.this).load(a1+"/tab_brand.png").into(new Target() {
+                       @Override
+                       public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                           mRelativeLayout.setBackground(new BitmapDrawable(bitmap));
+                       }
+
+                       @Override
+                       public void onBitmapFailed(Drawable errorDrawable) {
+                           Toast.makeText(PreviewActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                       }
+
+                       @Override
+                       public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                       }
+
+                   });
+               }
+           },1000);
+
+          /*   Glide.with(this).load(a1+"/phone_brand.png").asBitmap().into(new SimpleTarget<Bitmap>(200, 200) {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 Drawable drawable = new BitmapDrawable(getApplicationContext().getResources(), resource);
@@ -125,8 +172,9 @@ String url, titleName;
                     }
                 }
             });
-            Log.d("TAGURL",a1+"/phone_brand.png");
-           // spinner.setVisibility(View.GONE);
+            Log.d("TAGURL",a1+"/tab_brand.png");
+          */ // spinner.setVisibility(View.GONE);
+
         }
 
         mFile=new File(getApplicationContext().getFilesDir()+"/"+tn0+"/");
@@ -138,7 +186,7 @@ String url, titleName;
          thumbDownload.setImageResource(R.drawable.ud_play_video_pressed);
          }else{
          thumbDownload.setImageResource(R.drawable.ud_download_pressed);
-        }
+         }
 
         thumbDownload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +225,8 @@ String url, titleName;
             }
         });
 
-        transcript.setOnClickListener(new View.OnClickListener() {
+
+         transcript.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(getApplicationContext(),Transcript.class);
@@ -185,9 +234,75 @@ String url, titleName;
                 startActivity(i);
             }
         });
-
-
     }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if (screenInches <= 5.571247911145661) {
+            final Handler h = new Handler();
+            h.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Picasso.with(getApplicationContext()).load(a1 + "/phone_brand.png").into(new Target() {
+
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            mRelativeLayout.setBackground(new BitmapDrawable(bitmap));
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+                            Toast.makeText(PreviewActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
+
+                    });
+                }
+            }, 100);
+          /*  Glide.with(this).load(a1+"/phone_brand.png").asBitmap().into(new SimpleTarget<Bitmap>(100, 100) {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    Drawable drawable = new BitmapDrawable(getApplicationContext().getResources(), resource);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        mRelativeLayout.setBackground(drawable);
+                    }
+                }
+            });
+            Log.d("TAGURL",a1+"/phone_brand.png");*/
+            //spinner.setVisibility(View.GONE);
+
+        } else {
+            final Handler h = new Handler();
+            h.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Picasso.with(getApplicationContext()).load(a1 + "/tab_brand.png").into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            mRelativeLayout.setBackground(new BitmapDrawable(bitmap));
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+                            Toast.makeText(PreviewActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
+
+                    });
+                }
+            }, 1000);
+        }
+    }
+
     @TargetApi(Build.VERSION_CODES.M)
     private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;
@@ -303,4 +418,3 @@ String url, titleName;
             }
         }
     }
-

@@ -59,6 +59,7 @@ public class Mydatabase  extends SQLiteOpenHelper {
         }
         return chapterList;
     }
+
     public ArrayList<DIctionaryContent> getAlphabets() {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<DIctionaryContent> chapterList = null;
@@ -72,6 +73,29 @@ public class Mydatabase  extends SQLiteOpenHelper {
                 {
                     DIctionaryContent chapter = new DIctionaryContent();
                     chapter.setAlphabet(cursor.getString(0));
+
+                    chapterList.add(chapter);
+                }
+            }
+            db.close();
+        }catch (Exception e){
+            Log.e("error", e + "");
+        }
+        return chapterList;
+    }
+    public ArrayList<DIctionaryContent> getDescription(String text) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<DIctionaryContent> chapterList = null;
+        try{
+            chapterList = new ArrayList<DIctionaryContent>();
+            String QUERY = "SELECT * FROM WordsTable WHERE  WDescription ='" + text + "'";
+            Cursor cursor = db.rawQuery(QUERY, null);
+            if(!cursor.isLast())
+            {
+                while (cursor.moveToNext())
+                {
+                    DIctionaryContent chapter = new DIctionaryContent();
+                    chapter.setDescription(cursor.getString(0));
 
                     chapterList.add(chapter);
                 }
@@ -143,7 +167,38 @@ public class Mydatabase  extends SQLiteOpenHelper {
         }
         return imageList;
     }
+    public ArrayList<DIctionaryContent> getContent(String content) {
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<DIctionaryContent> imageList = new ArrayList<DIctionaryContent>();
+        try {
+            imageList = new ArrayList<DIctionaryContent>();
+            String QUERY=" SELECT WVideoName FROM WordsTable WHERE WVideoName Like"+"'"+content+"%"+"'";
+
+            Cursor mCursor = db.rawQuery(QUERY, null);
+
+            if (!mCursor.isLast()) {
+
+                DIctionaryContent m=new DIctionaryContent();
+
+                int i=0;
+                while (mCursor.moveToNext()) {
+
+                    DIctionaryContent chapter = new DIctionaryContent();
+                    chapter.setVDOname(mCursor.getString(0));
+                    String si=mCursor.getString(mCursor.getColumnIndex("WVideoName"));
+
+                    //chapter.setVDOname(mCursor.getString(mCursor.getColumnIndex("WVideoName")));
+                    imageList.add(chapter);
+                }
+            }
+            db.close();
+            mCursor.close();
+        } catch (Exception e) {
+            Log.e("TITLE NAME", e + "" + e.getMessage());
+        }
+        return imageList;
+    }
     private DIctionaryContent parseContent(Cursor cursor) {
         DIctionaryContent content = new DIctionaryContent();
         content.setID((cursor.getInt(cursor.getColumnIndex("WID"))));

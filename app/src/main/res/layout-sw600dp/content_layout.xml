@@ -5,51 +5,80 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/md_grey_100">
+
     <android.support.v7.widget.CardView
-        android:elevation="15dp"
-        card_view:cardCornerRadius="10dp"
-        card_view:contentPadding="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:elevation="15dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:contentPadding="0dp">
+
         <LinearLayout
-            android:background="@color/md_blue_grey_900"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#181E2A"
+            android:orientation="horizontal">
+
             <android.support.v7.widget.CardView
-                android:elevation="10dp"
-                android:layout_marginLeft="10dp"
-                card_view:cardCornerRadius="15dp"
-                card_view:contentPadding="0dp"
                 android:layout_width="135dp"
                 android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="2dp"
+                android:layout_marginLeft="10dp"
+                android:elevation="10dp"
+                card_view:cardCornerRadius="15dp"
+                card_view:contentPadding="0dp">
+
                 <ImageView
-                android:scaleType="fitXY"
-                android:id="@+id/chapter_thumb_iv"
-                android:src="@color/black"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                    android:id="@+id/chapter_thumb_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@color/black" />
             </android.support.v7.widget.CardView>
-            <TextView
-                android:layout_gravity="center|center_vertical|center_horizontal"
-                android:textAlignment="center"
-                android:lines="2"
-                android:minLines="2"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:layout_below="@+id/img"
-                android:text="TextView"
-                android:textColor="@color/md_white_1000"
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/chapter_tv" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chapter_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginRight="60dp"
+                    android:gravity="left|center|center_horizontal|center_vertical"
+                    android:lines="2"
+                    android:minLines="2"
+                    android:text="TextView"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="21dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/ic_play"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center|end"
+                        android:layout_marginEnd="26dp"
+                        android:src="@drawable/ic_play" />
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

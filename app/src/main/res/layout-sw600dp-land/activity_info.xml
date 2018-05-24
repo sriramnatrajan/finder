@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background= "#374c68"
-    tools:context="focusmedica.com.sparsh1.Info">
+    android:background= "#374c68">
 
     <ImageView
         android:layout_width="120dp"

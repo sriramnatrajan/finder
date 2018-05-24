@@ -42,6 +42,7 @@ public class Firstpage extends Activity {
         urlValue=i.getStringExtra("url");
 
         url=urlValue+"/"+a3+"_db.dll";
+        Log.d("DB_DOWNLOAD",url);
         b1=i.getStringExtra("titleName");
         b2=i.getStringExtra("app_id");
         b3=i.getStringExtra("url");

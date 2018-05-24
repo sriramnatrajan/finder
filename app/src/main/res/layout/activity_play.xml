@@ -1,13 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:layout_height="match_parent">
 
-    <VideoView
-        android:layout_width="fill_parent"
-        android:layout_height="400dp"
-        android:layout_centerVertical="true"
-        android:id="@+id/videoView"
-        android:layout_centerHorizontal="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#000000">
+
+        <RelativeLayout
+            android:id="@+id/relate"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="#ffffff"
+        android:id="@+id/linear"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:src="@drawable/pause"
+            android:id="@+id/btnPauseResume"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+        </ImageView>
+
+        <SeekBar
+            android:layout_width="200dp"
+            android:id="@+id/seekbar"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/seek"
+            android:max="100"
+            android:progress="0">
+        </SeekBar>
+
+        <TextView
+            android:textSize="18sp"
+            android:text="0:00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/current"/>
+
+        <LinearLayout
+            android:gravity="center"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_marginLeft="35dp"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:gravity="center"
+                android:src="@drawable/screenshot"
+                android:textSize="18sp"
+                android:id="@+id/btnScreenshot"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </ImageView>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="2dp"
+                android:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:src="@drawable/pencil"
+                android:id="@+id/btnPencil"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </ImageView>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="2dp"
+                android:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:src="@drawable/ic_action_delete"
+                android:textSize="18sp"
+                android:id="@+id/btnRefresh"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </ImageView>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

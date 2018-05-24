@@ -1,17 +1,17 @@
 package com.focusmedica.aqrshell.utils.Activities;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.focusmedica.aqrshell.ApiCaller;
@@ -30,12 +30,12 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class LogActivity extends Activity {
+public class LogActivity extends AppCompatActivity {
     private static final String TAG = RegisterActivity.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister,btnCollection;
-    private EditText inputEmail,inputCode;
-    private EditText inputPassword;
+    private TextInputEditText inputCode;
+    private TextInputEditText inputPassword;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
@@ -47,10 +47,9 @@ public class LogActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
+        inputCode=(TextInputEditText)findViewById(R.id.coupon_id);
 
-        inputCode=(EditText)findViewById(R.id.coupon_id);
-
-        inputPassword = (EditText) findViewById(R.id.password);
+        inputPassword = (TextInputEditText)findViewById(R.id.password);
        btnLogin = (Button) findViewById(R.id.btnLogin);
 
        /* final ActionBar actionBar = getActionBar();
@@ -164,8 +163,8 @@ public class LogActivity extends Activity {
                             Log.d(TAG, result);
 
                             try {
-                                JSONObject jObj = new JSONObject(result);
 
+                                JSONObject jObj = new JSONObject(result);
                                 String name = jObj.getString("name");
                                 String value = jObj.getString("value");
                                 String appid = jObj.getString("app_folder");
@@ -180,24 +179,21 @@ public class LogActivity extends Activity {
                                 Intent intent = new Intent(LogActivity.this,
                                         CollectionsActivity.class);
                               //  intent.putExtra("name",name);
-                                Toast.makeText(getApplicationContext(), "name=" +name, Toast.LENGTH_SHORT).show();
+                             //   Toast.makeText(getApplicationContext(), "name=" +name, Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
-                                finish();
+                              //finish();
                                 hideDialog();
                             } catch (JSONException e) {
                                 // JSON error
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "Incorrect code", Toast.LENGTH_LONG).show();
-                                //Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
+
+                              }
                       }
                     }
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-
-                        //   Toast.makeText(getApplicationContext(), "onFailure=fail", Toast.LENGTH_SHORT).show();
-
-                    }
+                      }
                 });
             }
             else {

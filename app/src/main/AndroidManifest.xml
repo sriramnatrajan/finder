@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".utils.Activities.LogActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Theme.AppCompat"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

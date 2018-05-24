@@ -10,7 +10,7 @@
     android:padding="10dp">
 
     <LinearLayout
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -20,6 +20,7 @@
         android:weightSum="1"
         android:layout_weight="0.07">
         <ImageView
+            android:layout_marginBottom="70dp"
             android:layout_gravity="center"
             android:background="@drawable/fmlogo"
             android:layout_width="wrap_content"
@@ -28,13 +29,14 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Focus Medica"
-            android:textSize="27dp"
+            android:textSize="29dp"
             android:textAlignment="center"
             android:textStyle="bold"
             android:textColor="@color/md_red_500"/>
-        <EditText
+
+
+  <!--      <EditText
             android:layout_gravity="center"
-            android:background="@color/white"
             android:id="@+id/coupon_id"
             android:layout_width="380dp"
             android:layout_height="62dp"
@@ -44,23 +46,58 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/md_grey_600"
-            android:textColorHint="@color/md_grey_600" />
+            android:textColorHint="@color/md_grey_600" />-->
+        <android.support.design.widget.TextInputLayout
+            android:layout_gravity="center"
+            android:layout_width="380dp"
+            android:backgroundTint="@color/md_white_1000"
+            android:textColorHint="@color/md_white_1000"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            android:layout_marginBottom="10dp">
 
+            <android.support.design.widget.TextInputEditText
+                android:textColor="@color/md_white_1000"
+                android:textColorHint="@color/md_white_1000"
+                android:layout_gravity="center"
+                android:id="@+id/coupon_id"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="user code"
+                android:padding="10dp" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
+        <!--<EditText
             android:layout_gravity="center"
             android:id="@+id/password"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
             android:hint="@string/hint_password"
             android:padding="10dp"
             android:singleLine="true"
             android:layout_weight="0.04"
             android:textColor="@color/md_grey_600"
-            android:textColorHint="@color/md_grey_600"/>
+            android:textColorHint="@color/md_grey_600"/>-->
+        <android.support.design.widget.TextInputLayout
+            android:layout_gravity="center"
+            android:layout_width="380dp"
+            android:id="@+id/etpassword"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            android:layout_marginBottom="10dp">
 
+            <android.support.design.widget.TextInputEditText
+                android:textColor="@color/md_white_1000"
+                android:textColorHint="@color/md_white_1000"
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="password"
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
         <!-- Login Button -->
 
         <Button

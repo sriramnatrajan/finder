@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/md_black_1000"
+    android:background="#111C22"
     tools:context="com.focusmedica.aqrshell.utils.Activities.CollectionsActivity">
 
     <com.baoyz.swipemenulistview.SwipeMenuListView

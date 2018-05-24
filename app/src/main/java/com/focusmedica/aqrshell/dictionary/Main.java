@@ -97,7 +97,6 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
         iv_download=(ImageView)mCustomView.findViewById(R.id.iv_download);
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
-
         handler=new Mydatabase(getApplicationContext(), "");
         AppDetails=handler.getAppDetail();
         content=AppDetails.get(0);
@@ -113,8 +112,7 @@ public class Main extends Activity implements  Sorting.OnHeadlineSelectedListene
           startActivity(in);
             }
         });
-     onArticleSelected("A");
-
+                 onArticleSelected("A");
 
     }
 

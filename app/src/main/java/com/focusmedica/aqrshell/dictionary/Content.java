@@ -55,6 +55,7 @@ public class Content extends Fragment {
     //Boolean ispremium=true;
     View mView;  String videofileName;
     ArrayList<DIctionaryContent> AppDetails=new ArrayList<>();
+    ArrayList<DIctionaryContent> contentValues=new ArrayList<>();
     String linkStr;
     ImageView iv_download;
     String name,description; ListAdapter.ViewHolder mViewHolder; String a0,a1;
@@ -89,8 +90,13 @@ public class Content extends Fragment {
 
                 TextView tv=(TextView)view.findViewById(R.id.textView);
                 TextView tv1=(TextView)view.findViewById(R.id.textView2);
+                ImageView left=(ImageView)view.findViewById(R.id.left_icon);
+                ImageView right=(ImageView)view.findViewById(R.id.right_icon);
+
                 contentq.setText(tv1.getText());
                 title.setText(tv.getText());
+                String str=tv.getText().toString();
+                contentValues=new ArrayList<>();
                 popup.showAtLocation(view, Gravity.CENTER_HORIZONTAL, 0, 0);
                 close.setOnClickListener(new View.OnClickListener() {
                     @Override

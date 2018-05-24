@@ -63,7 +63,9 @@ public class CollectionsActivity extends Activity {
         LayoutInflater mInflater = LayoutInflater.from(this);
         mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         ImageView info=(ImageView)mCustomView.findViewById(R.id.imageView4);
-       info.setVisibility(View.INVISIBLE);
+        mCustomView.setBackground(new ColorDrawable(Color.parseColor("#34495C")));
+       // mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3d4f6d")));
+        info.setVisibility(View.INVISIBLE);
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         ImageView i=(ImageView)mCustomView.findViewById(R.id.iv_download) ;
@@ -191,11 +193,11 @@ public class CollectionsActivity extends Activity {
         lvAppList.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
         lvAppList.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
     }
-
+/*
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent i=new Intent(getApplicationContext(),LogActivity.class);
         startActivity(i);
-    }
+    }*/
 }
