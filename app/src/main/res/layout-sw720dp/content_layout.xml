@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="220dp"
     xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/md_grey_100">
@@ -24,7 +24,7 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="135dp"
-                android:layout_height="150dp"
+                android:layout_height="210dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -49,8 +49,8 @@
 
                 <TextView
                     android:id="@+id/chapter_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="390dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
                     android:layout_alignTop="@+id/ic_play"
                     android:layout_gravity="center|center_vertical|center_horizontal"
@@ -58,15 +58,15 @@
                     android:lines="2"
                     android:minLines="2"
                     android:text="TextView"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="@color/md_white_1000"
                     android:textSize="25dp"
-                    android:textStyle="bold" />
+                    />
 
                 <ImageView
                     android:id="@+id/ic_play"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center|end"

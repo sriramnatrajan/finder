@@ -29,16 +29,16 @@
 
     <fragment
         android:id="@+id/sorting"
-        class="com.focusmedica.aqrshell.dictionary.Sorting"
-        android:name="com.focusmedica.aqrshell.dictionary.Sorting"
+        class=" com.pantherpublishers.ud.shell.dictionary.Sorting"
+        android:name=" com.pantherpublishers.ud.shell.dictionary.Sorting"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1" />
 
     <fragment
         android:id="@+id/content"
-        class="com.focusmedica.aqrshell.dictionary.Content"
-        android:name="com.focusmedica.aqrshell.dictionary.Content"
+        class=" com.pantherpublishers.ud.shell.dictionary.Content"
+        android:name=" com.pantherpublishers.ud.shell.dictionary.Content"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="8" />

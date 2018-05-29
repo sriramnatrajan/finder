@@ -50,23 +50,21 @@
 
                 <TextView
                     android:id="@+id/chapter_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:layout_alignTop="@+id/ic_play"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_centerVertical="true"
                     android:gravity="left|center"
                     android:lines="2"
                     android:minLines="2"
                     android:text="TextView"
                     android:textColor="@color/md_white_1000"
-                    android:textSize="13dp" />
+                    android:textSize="16dp" />
 
                 <ImageView
                     android:id="@+id/ic_play"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center|end"

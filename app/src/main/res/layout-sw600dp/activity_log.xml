@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backlayout"
+    android:background="#111C22"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp">
@@ -35,7 +35,10 @@
             android:textColor="@color/md_red_500"/>
 
 
-  <!--      <EditText
+       <EditText
+
+           android:layout_marginTop="30dp"
+           android:background="@drawable/et_box"
             android:layout_gravity="center"
             android:id="@+id/coupon_id"
             android:layout_width="380dp"
@@ -46,8 +49,8 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/md_grey_600"
-            android:textColorHint="@color/md_grey_600" />-->
-        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/md_grey_300" />
+        <!--<android.support.design.widget.TextInputLayout
             android:layout_gravity="center"
             android:layout_width="380dp"
             android:backgroundTint="@color/md_white_1000"
@@ -67,9 +70,10 @@
                 android:inputType="text"
                 android:hint="user code"
                 android:padding="10dp" />
-        </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>-->
 
-        <!--<EditText
+        <EditText
+            android:background="@drawable/et_box"
             android:layout_gravity="center"
             android:id="@+id/password"
             android:layout_width="380dp"
@@ -80,8 +84,8 @@
             android:singleLine="true"
             android:layout_weight="0.04"
             android:textColor="@color/md_grey_600"
-            android:textColorHint="@color/md_grey_600"/>-->
-        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/md_grey_300"/>
+       <!-- <android.support.design.widget.TextInputLayout
             android:layout_gravity="center"
             android:layout_width="380dp"
             android:id="@+id/etpassword"
@@ -97,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:hint="password"
                 android:inputType="textPassword"/>
-        </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>-->
         <!-- Login Button -->
 
         <Button
@@ -107,21 +111,22 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
-            android:background="@color/md_yellow_700"
+            android:background="@color/md_yellow_800"
             android:text="@string/btn_login"
-            android:textColor="@color/md_black_1000" />
+            android:textAllCaps="false"
+            android:textColor="@color/md_white_1000"/>
 
         <Button
+            android:textAllCaps="false"
+            android:textColor="@color/md_white_1000"
             android:elevation="10dp"
             android:layout_gravity="center"
             android:id="@+id/collbtn"
-            android:textColor="@color/md_black_1000"
-            android:background="@color/md_yellow_700"
+            android:background="@color/md_yellow_800"
             android:text="Collections"
             android:layout_marginTop="15dp"
             android:layout_width="380dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
 
 </LinearLayout>

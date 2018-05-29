@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.focusmedica.aqrshell.utils.Activities.TabbedActivity">
+    tools:context=" com.pantherpublishers.ud.shell.utils.Activities.TabbedActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

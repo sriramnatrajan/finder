@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.focusmedica.aqrshell">
+    package="com.pantherpublishers.ud.shell">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,14 +13,14 @@
         android:value="@integer/google_play_services_version" />
 
     <application
-        android:name=".utils.Activities.ApplicationController"
+        android:name="com.pantherpublishers.ud.shell.utils.Activities.ApplicationController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".utils.Activities.LogActivity"
+        <activity android:name="com.pantherpublishers.ud.shell.utils.Activities.LogActivity"
             android:theme="@style/Theme.AppCompat"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -29,36 +29,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+        <!--<activity
             android:name=".MainActivity"
             android:launchMode="singleTask" />
 
         <meta-data
             android:name="android.app.searchable"
-            android:resource="@xml/searchable" />
+            android:resource="@xml/searchable" />-->
 
         <activity
-            android:name=".MediaPlayerActivity"
+            android:name="com.pantherpublishers.ud.shell.MediaPlayerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".dictionary.Info" />
-        <activity android:name=".Notes" />
-        <activity android:name=".Transcript" />
-        <activity android:name=".ContentActivity" />
-        <activity android:name=".utils.Activities.CollectionsActivity" />
-        <activity android:name=".utils.Activities.DMLanguageActivity" />
-        <activity android:name=".PageActivity" />
-        <activity android:name=".VideoChecker2Activity" />
-        <activity android:name=".VideoPlay2Activity" />
-        <activity android:name=".VideoDownloader2Activity" />
-        <activity android:name=".utils.Activities.RegisterActivity" />
-        <activity android:name=".PreviewActivity" />
-        <activity android:name=".PlayActivity" />
+        <activity android:name="com.pantherpublishers.ud.shell.dictionary.Info" />
+        <activity android:name="com.pantherpublishers.ud.shell.Notes" />
+        <activity android:name="com.pantherpublishers.ud.shell.Transcript" />
+        <activity android:name="com.pantherpublishers.ud.shell.ContentActivity" />
+        <activity android:name="com.pantherpublishers.ud.shell.utils.Activities.CollectionsActivity" />
+        <activity android:name="com.pantherpublishers.ud.shell.utils.Activities.DMLanguageActivity" />
+        <activity android:name="com.pantherpublishers.ud.shell.PageActivity" />
+        <activity android:name="com.pantherpublishers.ud.shell.VideoChecker2Activity" />
+        <activity android:name="com.pantherpublishers.ud.shell.VideoPlay2Activity" />
+        <activity android:name="com.pantherpublishers.ud.shell.VideoDownloader2Activity" />
+        <activity android:name="com.pantherpublishers.ud.shell.utils.Activities.RegisterActivity" />
+        <activity android:name="com.pantherpublishers.ud.shell.PreviewActivity" />
+        <activity android:name="com.pantherpublishers.ud.shell.PlayActivity" />
         <activity
-            android:name=".dictionary.Firstpage"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".dictionary.Main" />
-        <activity android:name=".dictionary.VideoPlay2Activity" />
-<activity android:name=".InfoActivity"/>
-    </application>
+            android:name="com.pantherpublishers.ud.shell.dictionary.Firstpage"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.pantherpublishers.ud.shell.dictionary.Main" />
+        <activity android:name="com.pantherpublishers.ud.shell.dictionary.VideoPlay2Activity"
+        android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.pantherpublishers.ud.shell.InfoActivity"/>
 
+    </application>
 </manifest>

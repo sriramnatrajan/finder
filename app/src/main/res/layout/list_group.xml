@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:textSize="18dp"
         android:textColor="@color/md_yellow_500"
         android:textAlignment="textStart"

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background= "#374c68"
+    android:background= "@color/info_grey"
     tools:context="Info">
 
     <ImageView
@@ -28,7 +28,7 @@
         android:textStyle="italic" />
 
     <RelativeLayout
-        android:background="#0f4666"
+        android:background="@color/info_footer"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="90dp"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#3D0E3F"
     android:id="@+id/apppic"
     tools:context="com.focusmedica.aqrshell.dictionary.Firstpage">
 

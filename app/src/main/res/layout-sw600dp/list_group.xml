@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:layout_marginTop="10dp"
         android:textSize="24dp"
         android:textColor="@color/md_yellow_500"
         android:textAlignment="textStart"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:text="understanding disease"
         android:textStyle="normal"
         android:layout_width="match_parent"

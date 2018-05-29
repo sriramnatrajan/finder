@@ -1,103 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/backlayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#111C22"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp">
+
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:weightSum="1"
+        android:layout_weight="0.07">
+        <ImageView
+            android:layout_marginBottom="30dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:layout_weight="0.07"
-            android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:weightSum="1">
+            android:background="@drawable/fmlogo"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Focus Medica"
+            android:textSize="29dp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/md_red_500"/>
 
-            <EditText
+
+        <EditText
+
+            android:layout_marginTop="30dp"
+            android:background="@drawable/et_box"
+            android:layout_gravity="center"
+            android:id="@+id/coupon_id"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Title Code"
+            android:inputType="text"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/md_grey_600"
+            android:textColorHint="@color/md_grey_300" />
+        <!--<android.support.design.widget.TextInputLayout
+            android:layout_gravity="center"
+            android:layout_width="380dp"
+            android:backgroundTint="@color/md_white_1000"
+            android:textColorHint="@color/md_white_1000"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            android:layout_marginBottom="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:textColor="@color/md_white_1000"
+                android:textColorHint="@color/md_white_1000"
+                android:layout_gravity="center"
                 android:id="@+id/coupon_id"
-                android:layout_width="fill_parent"
-                android:layout_height="62dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/white"
-                android:hint="Title Code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:inputType="text"
-                android:padding="10dp"
-                android:singleLine="true"
-                android:textColor="@color/md_grey_600"
-                android:textColorHint="@color/md_grey_600" />
+                android:hint="user code"
+                android:padding="10dp" />
+        </android.support.design.widget.TextInputLayout>-->
 
-            <!--  <EditText
-                  android:id="@+id/email"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="10dp"
-                  android:background="@color/white"
-                  android:hint="@string/hint_email"
-                  android:inputType="textEmailAddress"
-                  android:padding="10dp"
-                  android:singleLine="true"
-                  android:textColor="@color/md_grey_600"
-                  android:textColorHint="@color/md_grey_600"
-                  android:layout_weight="0.04" />
-      -->
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="0.04"
-                android:background="@color/white"
-                android:hint="@string/hint_password"
-                android:padding="10dp"
-                android:singleLine="true"
-                android:textColor="@color/md_grey_600"
-                android:textColorHint="@color/md_grey_600" />
+        <EditText
+            android:background="@drawable/et_box"
+            android:layout_gravity="center"
+            android:id="@+id/password"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/hint_password"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:layout_weight="0.04"
+            android:textColor="@color/md_grey_600"
+            android:textColorHint="@color/md_grey_300"/>
+        <!-- <android.support.design.widget.TextInputLayout
+             android:layout_gravity="center"
+             android:layout_width="380dp"
+             android:id="@+id/etpassword"
+             android:layout_height="wrap_content"
+             app:passwordToggleEnabled="true"
+             android:layout_marginBottom="10dp">
 
-            <!-- Login Button -->
+             <android.support.design.widget.TextInputEditText
+                 android:textColor="@color/md_white_1000"
+                 android:textColorHint="@color/md_white_1000"
+                 android:id="@+id/password"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="password"
+                 android:inputType="textPassword"/>
+         </android.support.design.widget.TextInputLayout>-->
+        <!-- Login Button -->
 
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="@color/md_pink_500"
-                android:text="@string/btn_login"
-                android:textColor="@color/white" />
+        <Button
+            android:elevation="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/btnLogin"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@color/md_yellow_800"
+            android:text="@string/btn_login"
+            android:textAllCaps="false"
+            android:textColor="@color/md_white_1000"/>
 
-            <!-- Link to Login Screen -->
-
-            <!--        <Button
-                        android:id="@+id/btnLinkToRegisterScreen"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dip"
-                        android:background="@null"
-                        android:text="@string/btn_link_to_register"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="15dp" />-->
-
-            <Button
-                android:id="@+id/collbtn"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@color/md_pink_500"
-                android:text="Collections"
-                android:textColor="@color/white" />
-        </LinearLayout>
-
-
+        <Button
+            android:textAllCaps="false"
+            android:textColor="@color/md_white_1000"
+            android:elevation="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/collbtn"
+            android:background="@color/md_yellow_800"
+            android:text="Collections"
+            android:layout_marginTop="15dp"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content" />
     </LinearLayout>
-</ScrollView>
+
+</LinearLayout>

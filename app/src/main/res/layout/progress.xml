@@ -12,7 +12,7 @@
     android:layout_centerInParent="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.focusmedica.aqrshell.ProgressBar
+    <com.pantherpublishers.ud.shell.ProgressBar
         android:id="@+id/progress_bar_download_dialog"
         android:layout_width="30dp"
         android:layout_height="30dp"

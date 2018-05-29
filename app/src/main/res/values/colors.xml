@@ -7,7 +7,9 @@
     <color name="white">#ffffff</color>
     <color name="black">#2b2929</color>
     <color name="grey">#e4e3e3</color>
+    <color name="info_grey">#111C22</color>
     <color name="dark_grey">#514d4d</color>
+    <color name="info_footer">#0B324F</color>
     <color name="md_red_50">#FFEBEE</color>
     <color name="md_red_100">#FFCDD2</color>
     <color name="md_red_200">#EF9A9A</color>
